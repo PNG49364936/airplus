@@ -1,0 +1,59 @@
+<div class="container mt-5 ">
+    
+    <table class="table table-bordered" style="border: 4px solid black;">
+        <h3>Operating aircrafts specifications</h3>
+        <thead>
+            <tr>
+               
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Aircrafts:</strong></td>
+                    <td><%= link_to "Créer type avion", new_aircraft_path, class: "creer" %></td>
+                    <td><%= link_to "Liste types avion", aircrafts_path, class: "creer" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Registrations:</strong></td>
+                    <td><%= link_to "Créér des immatriculations", new_registration_path, class: "creer" %></td>
+                    <td><%= link_to "Liste des immatriculations", registrations_path, class: "creer" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Cabins:</strong></td>
+                    <td><%= link_to "Créer cabins", new_cabin_path, class: "creer" %></td>
+                    <td><%= link_to "Liste des cabins", cabins_path, class: "creer" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Seats:</strong></td>
+                    <td><%= link_to "Créer Seats number", new_seat_path, class: "creer" %></td>
+                    <td><%= link_to "Liste des Seats number", seats_path, class: "creer" %></td>
+                </tr>
+            </tbody>
+     </table>
+     <br>
+     <table class="table table-bordered" style="border: 4px solid black;">
+        <h3>Operating flights</h3>
+        <thead>
+            <tr>
+               
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Flight ops:</strong></td>
+                    <td><%= link_to "Créer Flight ops", new_flight_path, class: "creer" %></td>
+                    <td><%= link_to "Liste flights ops", flights_path, class: "creer" %></td>
+                </tr>
+                
+            </tbody>
+     </table>
+
+
+
+
+
+
+
+
+</div>
+

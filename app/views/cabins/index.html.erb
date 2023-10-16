@@ -1,0 +1,25 @@
+<div class="container mt-10">
+    <div class="row">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <td>Cabins codes</td>
+                 </tr>
+             </thead>
+ 
+                 <tbody>
+                     <%  @cabins.each do |cabin| %>
+                     <tr>
+                         <td><%= cabin.cbn %></td>
+                         <td>
+                             <%=link_to"Annuler cabin", cabin_path(cabin),method: :delete, class: "btn btn-danger btn-margin"%>
+                             
+                         </td>
+                     </tr>
+                      <% end %>
+                    
+                 </tbody>
+ 
+         </table>
+ 
+         <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 

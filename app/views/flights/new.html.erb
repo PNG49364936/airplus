@@ -1,0 +1,29 @@
+<div class="container col-12">
+    <div>
+        <h1>Créer Flight Aircraft</h1>
+    </div>
+    <div class="row">
+        <div class="col-4 mt-5" >
+         
+
+         
+            <%= simple_form_for(@flight) do |f| %>
+            <div class="form-group">
+                <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
+                <% pp "test"* 10%>
+                <%= f.collection_select :registration_id, Registration.all, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %>
+            </div>
+            <br><br>
+
+            <div class="submit">
+                <%=f.submit"Valider", class: "btn btn-primary"%>
+                <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span>
+            </div>
+
+
+                <% end %>
+        </div>
+        
+    </div>
+
+</div> 

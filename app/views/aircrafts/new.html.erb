@@ -1,0 +1,34 @@
+<div class="container col-12">
+
+    <div class="int1">
+       <h1>Create Aircraft Type</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-4 mt-5">
+            <%= simple_form_for(@aircraft) do |f| %>
+                <div class="col-2.5">
+                    <%=  f.label :acft,content_tag(:strong, 'Aircraft type:') %>
+                    <%=  f.text_field :acft, class:"rounded-box"%>
+                </div>
+                <br><br>
+                <div class="submit">
+                    <%=f.submit"Valider", class: "btn btn-primary"%>
+                </div>   
+                <br><br>
+                <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+            <%end%>
+                 <% if @aircraft.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@aircraft.errors.count, "error") %> </h2>
+                        <ul>
+                            <% @aircraft.errors.full_messages.each do |message| %>
+                                <li><%= message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                 <% end %>
+
+        </div>
+    </div>
+</div>

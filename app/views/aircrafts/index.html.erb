@@ -1,0 +1,51 @@
+<div class="container mt-10">
+   <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Aircraft type</td>
+                </tr>
+            </thead>
+
+                <tbody>
+                    <%  @aircrafts.each do |aircraft| %>
+                    <tr>
+                        <td><%= aircraft.acft %></td>
+                        <td>
+                            <%=link_to"Annuler type avion", aircraft_path(aircraft),method: :delete, class: "btn btn-danger btn-margin"%>
+                            
+                        </td>
+                    </tr>
+                     <% end %>
+                   
+                </tbody>
+
+        </table>
+
+        <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+
+
+
+
+
+
+
+
+
+
+
+
+   </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

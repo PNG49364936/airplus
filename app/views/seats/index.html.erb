@@ -1,0 +1,25 @@
+<div class="container mt-10">
+    <div class="row">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <td>Seats</td>
+                 </tr>
+             </thead>
+ 
+                 <tbody>
+                     <%  @seats.each do |seat| %>
+                        <tr>
+                            <td><%= seat.number %></td>
+                         
+                            <td>
+                                <%=link_to"Annuler seats", seat_path(seat),method: :delete, class: "btn btn-danger btn-margin"%>
+                                
+                            </td>
+                        </tr>
+                      <% end %>
+                   </tbody>
+ 
+         </table>
+ 
+         <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 

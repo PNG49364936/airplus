@@ -1,0 +1,31 @@
+<div class="container col-12">
+
+    <div>
+        <% if @registration.errors.any? %>
+             <div id="error_explanation">
+                 <h2><%= pluralize(@registration.errors.count, "error") %> </h2>
+                 <ul>
+                     <% @registration.errors.full_messages.each do |message| %>
+                         <li><%= message %></li>
+                     <% end %>
+                 </ul>
+             </div>
+         <% end %>
+  </div>   
+
+    <div class="row">
+        <div class="col-3 mt-5">
+            <%= simple_form_for(@registration) do |f| %>
+                <div class="col-2.5">
+                    <%=  f.label :reg,content_tag(:strong, 'Registration:') %>
+                    <%=  f.text_field :reg, class:"rounded-box"%>
+                </div>
+                <br><br>
+                    <div class="submit">
+                        <%=f.submit"Valider", class: "btn btn-primary"%>
+                    </div>   
+                    <br><br>
+                    <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+            <%end%>
+    </div>
+</div>

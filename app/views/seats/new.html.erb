@@ -1,0 +1,37 @@
+<div class="container col-12">
+
+    <div class="row">
+        <div>
+            <% if @seat.errors[:number].any? %>
+            <div class="error-message">
+              Le nombre doit être supérieur à 99 et inférieur à 451.
+            </div>
+          <% end %>
+      </div>   
+
+        <div class="col-3 mt-5">
+            <%= simple_form_for(@seat) do |f| %>
+                        <div class="col-2.5">
+                            <%=  f.label :number,content_tag(:strong, 'Seats number:') %>
+                            <%=  f.text_field :number, class:"rounded-box"%>
+                        </div>
+                    <br><br>
+                            <div class="submit">
+                                <%=f.submit"Valider", class: "btn btn-primary"%>
+                            </div>   
+                        <br><br>
+                        <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+             <%end%>
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
