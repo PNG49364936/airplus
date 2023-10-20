@@ -1,0 +1,2 @@
+module HaulsHelper
+end

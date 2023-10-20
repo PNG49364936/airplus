@@ -1,0 +1,2 @@
+class Haul < ApplicationRecord
+end

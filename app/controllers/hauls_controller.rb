@@ -1,0 +1,2 @@
+class HaulsController < ApplicationController
+end
