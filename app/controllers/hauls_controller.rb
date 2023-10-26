@@ -3,14 +3,15 @@ class HaulsController < ApplicationController
     before_action   :set_haul, only:[:show, :edit, :upgrade, :destroy]
 
 def index 
-    @hauls = Hauls.all
+    @hauls = Haul.all
 end
 
 def show 
 end
 
 def new 
-    @haul = haul.new
+    @hauls = Haul.all
+    @haul = Haul.new
 end 
 
 def create
@@ -30,7 +31,7 @@ end
 
 def destroy
     @haul.destroy
-    redirect_to @haul_url
+    redirect_to hauls_url, notice: "Haul destroyed"
 
 end
 

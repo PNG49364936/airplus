@@ -1,0 +1,25 @@
+<div class="container mt-10">
+    <div class="row">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <td>Réseaux</td>
+                 </tr>
+             </thead>
+ 
+                 <tbody>
+                     <%  @hauls.each do |haul| %>
+                        <tr>
+                            <td><%= haul.name %></td>
+                            <td>
+                                <%=link_to"Annuler type avion", haul_path(haul),method: :delete, class: "btn btn-danger btn-margin"%>
+                                
+                            </td>
+                        </tr>
+                      <% end %>
+                 </tbody>
+ 
+         </table>
+ 
+         <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+ 

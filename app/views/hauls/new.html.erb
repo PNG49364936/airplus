@@ -1,0 +1,54 @@
+<div class="container"> 
+   <div class="container col-12">
+
+
+           
+            <div>
+                <% if @hauls.present? %>
+                    <tbody>
+                            <h4>Haul(s) déjà créés :</h4>
+                            <%  @hauls.each do |haul| %>
+                                <tr>
+                                    <td><%= haul.name %></td>
+                                </tr>
+                            <% end %>
+                    </tbody>
+                <% end %>
+            </div>
+            
+                <div>
+                    <% if @haul.errors.any? %>
+                        <div id="error_explanation">
+                            <h2><%= pluralize(@haul.errors.count, "error") %> </h2>
+                            <ul>
+                                <% @haul.errors.full_messages.each do |message| %>
+                                    <li><%= message %></li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    <% end %>
+                </div>   
+                <div class="int1">
+                    <h1>Create Flight Haul code</h1>
+                </div>
+
+                
+                        <div class="row">
+                                <div class="col-3 mt-5">
+                                <%= simple_form_for(@haul) do |f| %>
+                                        <div class="col-2.5">
+                                            <%=  f.label :name,content_tag(:strong, 'Haul code:') %>
+                                            <%=  f.text_field :name, class:"rounded-box"%>
+                                        </div>
+                                            <br><br>
+                                            <div class="submit">
+                                                <%=f.submit"Valider", class: "btn btn-primary"%>
+                                            </div>   
+                                        <br><br>
+                                            <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+                                    <%end%>
+                                </div> 
+                        </div>        
+    </div>
+
+</div>  

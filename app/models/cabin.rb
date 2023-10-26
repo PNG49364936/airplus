@@ -1,7 +1,8 @@
 class Cabin < ApplicationRecord
     validate :unique_cbn
     validates :cbn, length: { within: 1..1 }
-   
+    before_validation :upcase_cbn
+    has_many :flights
 
     validates :cbn, presence: true, format: { with: /\A[A-Z]+\z/,
         message: "doit contenir uniquement des lettres majuscules" }
@@ -14,6 +15,11 @@ class Cabin < ApplicationRecord
           errors.add(:cbn, " : La lettre #{self.cbn} est déjà utilisée.")
         end
     end
+
+    def upcase_cbn
+        self.cbn = cbn.upcase if cbn.present?
+    end 
+
 
    
 

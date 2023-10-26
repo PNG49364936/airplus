@@ -4,16 +4,37 @@
     </div>
     <div class="row">
         <div class="col-4 mt-5" >
-         
+       
+            <% if @registration.nil? %>
+                <div class="alert alert-danger">
+                  No registration, create it.
+                </div>
+            <% end %>
+            <% if @aircraft.nil? %>
+                <div class="alert alert-danger">
+                  No registration, create it.
+                </div>
+            <% end %>
 
-         
+          
+           
             <%= simple_form_for(@flight) do |f| %>
-            <div class="form-group">
-                <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
-                <% pp "test"* 10%>
-                <%= f.collection_select :registration_id, Registration.all, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %>
-            </div>
-            <br><br>
+                    <div class="registration form-group">
+                        <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
+                        <% pp "test22"* 10%>
+                        <%= f.collection_select :registration_id, Registration.all, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                    </div>
+
+                    <div class="aircraft form-group">
+                        <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
+                        <% pp "test22"* 10%>
+                        <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                    </div>
+
+
+                    <br>
+                    
+                    <br><br>
 
             <div class="submit">
                 <%=f.submit"Valider", class: "btn btn-primary"%>

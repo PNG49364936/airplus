@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   resources :seats
   resources :registrations
   resources :flights
- 
+  resources :hauls
 end

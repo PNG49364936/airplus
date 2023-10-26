@@ -5,6 +5,7 @@ class FlightsController < ApplicationController
  
   def index
     @flights = Flight.all
+    @aircrafts = Aircraft.all
   end
 
   def show
@@ -13,11 +14,14 @@ class FlightsController < ApplicationController
   def new
     @flight =Flight.new
     @registration =  Registration.all
+    @registration = Registration.first
+    @aircraft = Aircraft.all
+    @aircraft = Aircraft.first
+   
   end
 
   def create
-    @flight = Registration.find(params[:flight][:registration_id]).flights.build(params_flight)
-
+    @flight = Flight.new(params_flight)
   if @flight.save
     redirect_to @flight, notice: 'Flight created.'
   else
@@ -43,7 +47,7 @@ class FlightsController < ApplicationController
   end
 
   def params_flight
-    params.require(:flight).permit(:registration_id)
+    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id)
   end
 
 
