@@ -12,7 +12,17 @@
             <% end %>
             <% if @aircraft.nil? %>
                 <div class="alert alert-danger">
-                  No registration, create it.
+                  No aircraft type, create it.
+                </div>
+            <% end %>
+            <% if @haul.nil? %>
+                <div class="alert alert-danger">
+                  No Haul network, create it.
+                </div>
+            <% end %>
+            <% if @cabin.nil? %>
+                <div class="alert alert-danger">
+                  No cabin letter, create it.
                 </div>
             <% end %>
 
@@ -21,15 +31,25 @@
             <%= simple_form_for(@flight) do |f| %>
                     <div class="registration form-group">
                         <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
-                        <% pp "test22"* 10%>
                         <%= f.collection_select :registration_id, Registration.all, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
                     </div>
-
+                    <br>
                     <div class="aircraft form-group">
                         <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
-                        <% pp "test22"* 10%>
                         <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
                     </div>
+                    <br>
+                    <div class="haul form-group">
+                        <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
+                        <%= f.collection_select :haul_id, Haul.all, :id, ->(haul) { "#{haul.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                    </div>
+                    <br>
+                    <div class="cabin form-group">
+                        <%= f.label :cabin_id, content_tag(:strong, "Cabin:") %>
+                        <%= f.collection_select :cabin_id, Cabin.all, :id, ->(cabin) { "#{cabin.cbn}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                    </div>
+
+
 
 
                     <br>

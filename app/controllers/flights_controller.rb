@@ -17,12 +17,16 @@ class FlightsController < ApplicationController
     @registration = Registration.first
     @aircraft = Aircraft.all
     @aircraft = Aircraft.first
+    @haul = Haul.all
+    @haul = Haul.first
+    @cabin = Cabin.all
+    @cabin = Cabin.first
    
   end
 
   def create
     @flight = Flight.new(params_flight)
-  if @flight.save
+       if @flight.save
     redirect_to @flight, notice: 'Flight created.'
   else
     render :new
@@ -47,7 +51,7 @@ class FlightsController < ApplicationController
   end
 
   def params_flight
-    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id)
+    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id)
   end
 
 

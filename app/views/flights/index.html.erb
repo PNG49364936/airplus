@@ -12,18 +12,24 @@
  
                  <tbody>
                      <%  @flights.each do |flight| %>
-                     <tr>
+                        <tr>
                          <td><%= flight.registration.reg %></td>
+                         <td><%= flight.aircraft.acft %></td>
+                         <td><%= flight.haul.name %></td>
+                         <td><%= flight.cabin.try(:cbn) %></td>
+                     
+                       
+
                   
                      
                    
 
                          <td>
-                             <%=link_to"Annuler type avion", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
+                             <%=link_to"Annuler aircraft", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
                              
                          </td>
-                     </tr>
-                      <% end %>
+                       </tr>
+                    <% end %>
                     
                  </tbody>
  
