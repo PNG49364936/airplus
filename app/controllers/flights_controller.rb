@@ -21,6 +21,8 @@ class FlightsController < ApplicationController
     @haul = Haul.first
     @cabin = Cabin.all
     @cabin = Cabin.first
+    @seat = Seat.all
+    @seat = Seat.first
    
   end
 

@@ -3,6 +3,7 @@ class Cabin < ApplicationRecord
     validates :cbn, length: { within: 1..1 }
     before_validation :upcase_cbn
     has_many :flights
+    validates :cbn, presence: true
 
     validates :cbn, presence: true, format: { with: /\A[A-Z]+\z/,
         message: "doit contenir uniquement des lettres majuscules" }

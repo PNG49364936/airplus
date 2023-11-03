@@ -3,6 +3,7 @@ class Seat < ApplicationRecord
 validate :unique_number
 validates :number, numericality: { greater_than: 99, less_than: 451 }
 has_many :flights
+validates :number, presence: true
 
 
 

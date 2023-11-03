@@ -1,13 +1,16 @@
 <div class="container col-12">
 
     <div class="row">
-        <div>
-            <% if @seat.errors[:number].any? %>
-            <div class="error-message">
-              Le nombre doit être supérieur à 99 et inférieur à 451.
-            </div>
-          <% end %>
-      </div>   
+        <% if @seat.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@seat.errors.count, "error") %> </h2>
+            <ul>
+                <% @seat.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %> 
 
         <div class="col-3 mt-5">
             <%= simple_form_for(@seat) do |f| %>

@@ -3,6 +3,7 @@ class Registration < ApplicationRecord
     validate :unique_reg
     validate :validate_code_format
     has_many :flights
+    validates :reg, presence: true
 
 
 
