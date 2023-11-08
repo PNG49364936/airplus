@@ -30,13 +30,14 @@
             <% end %>
             
            
-            
+           
           
            
             <%= simple_form_for(@flight) do |f| %>
                     <div class="registration form-group">
                         <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
-                        <%= f.collection_select :registration_id, Registration.all, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                     
+                        <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
                     </div>
                     <br>
                     <div class="aircraft form-group">

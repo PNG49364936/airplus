@@ -6,7 +6,7 @@ class Aircraft < ApplicationRecord
     validates :acft, presence: true
     validates :acft, format: { with: /\A[a-zA-Z][0-9]+\z/,
     message:   "doit commencer par une lettre et être suivi de 3 chiffres" }
-    has_many :flights
+    has_many :flights, dependent: :destroy
 #_________________________________________________________________________________
    private
 

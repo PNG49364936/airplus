@@ -2,7 +2,7 @@ class Cabin < ApplicationRecord
     validate :unique_cbn
     validates :cbn, length: { within: 1..1 }
     before_validation :upcase_cbn
-    has_many :flights
+    has_many :flights , dependent: :destroy
     validates :cbn, presence: true
 
     validates :cbn, presence: true, format: { with: /\A[A-Z]+\z/,

@@ -17,11 +17,11 @@ class RegistrationsController < ApplicationController
 
   def create
     @registration = Registration.new(params_registration)
-    if @registration.save
-      redirect_to @registration, notice: 'Registration was successfully created.'
-      else
-      render :new
-     end
+        if @registration.save
+            redirect_to @registration, notice: 'Registration was successfully created.'
+          else
+            render :new
+        end
   end
 
   def edit
@@ -31,9 +31,22 @@ class RegistrationsController < ApplicationController
   end
 
   def destroy
-    @registration.destroy
-    redirect_to registrations_url, notice: 'Seats was successfully destroyed.'
+    pp "A"*100
+        if @registration.flights.any?
+          pp "B"*100
+          flash[:alert] = "This registration is used by flights and cannot be deleted."
+          else
+            pp "C"*100
+            @registration.destroy
+            pp "D"*100
+            flash[:notice] = "Registration was successfully deleted."
+        end
+        redirect_to registrations_url
   end
+  
+   
+  
+ 
 
   private 
     def set_registration

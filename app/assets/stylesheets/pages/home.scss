@@ -1,2 +1,22 @@
-.creer{
-    margin-right: 10px;}
+.custom-background{
+    background-color: deepskyblue;
+}
+.B777{
+    position: fixed; /* L'image restera fixe */
+  top: 50%; /* Position verticale au milieu de la page */
+  left: 20%; /* Position horizontale au milieu de la page */
+  transform: translate(-50%, -50%); /* Centrer l'image */
+}
+
+.home-tittle{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: blue;
+    font-size: 100px;
+}
+
+.airplus{
+    font-size: 130px;
+}

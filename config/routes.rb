@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'registrations/edit'
   get 'registrations/update'
   get 'registrations/destroy'
+  get 'pages/operations'
   root to: 'pages#home'
 
   resources :aircrafts
@@ -22,4 +23,5 @@ Rails.application.routes.draw do
   resources :registrations
   resources :flights
   resources :hauls
+  
 end

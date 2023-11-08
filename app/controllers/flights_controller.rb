@@ -24,6 +24,10 @@ class FlightsController < ApplicationController
     @seat = Seat.all
     @seat = Seat.first
    
+    @used_registrations = Flight.pluck(:registration_id)
+    @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
+    @available_registrations = Registration.where.not(reg: @used_registration_numbers)
+   
   end
 
   def create
