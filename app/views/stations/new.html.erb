@@ -1,0 +1,30 @@
+<div class="container col-12">
+
+    <div class="row">
+        <% if @station.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@station.errors.count, "error") %> </h2>
+            <ul>
+                <% @station.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %> 
+
+        <div class="col-3 mt-5">
+            <%= simple_form_for(@station) do |f| %>
+                        <div class="col-2.5">
+                            <%=  f.label :name,content_tag(:strong, 'Station:') %>
+                            <%=  f.text_field :name, class:"rounded-box"%>
+                        </div>
+                    <br><br>
+                            <div class="submit">
+                                <%=f.submit"Valider", class: "btn btn-primary"%>
+                            </div>   
+                        <br><br>
+                        <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+             <%end%>
+        </div>
+    </div>
+</div>

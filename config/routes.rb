@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   resources :registrations
   resources :flights
   resources :hauls
+  resources :stations
   
 end
