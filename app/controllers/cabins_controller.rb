@@ -10,6 +10,7 @@ end
 
 def new 
     @cabin = Cabin.new
+    @cabins = Cabin.all
 end
 
 def create

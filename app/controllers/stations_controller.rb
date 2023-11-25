@@ -11,6 +11,7 @@ class StationsController < ApplicationController
 
     def new
         @station = Station.new
+        @stations = Station.all
     end
 
     def create 

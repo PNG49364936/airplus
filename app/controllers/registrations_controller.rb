@@ -9,10 +9,13 @@ class RegistrationsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
     @registration = Registration.new
+    @registrations = Registration.all
+    
   end
 
   def create

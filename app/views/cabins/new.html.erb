@@ -1,4 +1,16 @@
 <div class="container col-12">
+                <div class="bordered">
+                            
+                    <% if @cabins.present? %>
+
+                                <h4>Cabin(s) déjà créés :</h4>
+                                    <td><%= @cabins.map(&:cbn).join(', ') %></td>
+                    <%else%>
+                            <div class="alert alert-danger">
+                                No cabin code, create it.
+                            </div>
+                    <% end %>
+                </div>
                  <div>
                        <% if @cabin.errors.any? %>
                             <div id="error_explanation">
@@ -26,7 +38,7 @@
                             <%=f.submit"Valider", class: "btn btn-primary"%>
                         </div>   
                         <br><br>
-                        <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+                        <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
                 <%end%>
          </div>
 

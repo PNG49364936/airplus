@@ -11,6 +11,7 @@ class SeatsController < ApplicationController
 
   def new
     @seat = Seat.new
+    @seats = Seat.all
   end
 
   def create

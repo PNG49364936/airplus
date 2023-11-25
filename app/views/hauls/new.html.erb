@@ -1,18 +1,16 @@
 <div class="container"> 
    <div class="container col-12">
-
+    
 
            
-            <div>
+            <div class="bordered">
                 <% if @hauls.present? %>
-                    <tbody>
                             <h4>Haul(s) déjà créés :</h4>
-                            <%  @hauls.each do |haul| %>
-                                <tr>
-                                    <td><%= haul.name %></td>
-                                </tr>
-                            <% end %>
-                    </tbody>
+                                  <td><%= @hauls.map(&:name).join(', ') %></td>
+                 <%else%>
+                 <div class="alert alert-danger">
+                    No haul, create it.
+                </div>
                 <% end %>
             </div>
             
@@ -28,14 +26,14 @@
                         </div>
                     <% end %>
                 </div>   
-                <div class="int1">
-                    <h1>Create Flight Haul code</h1>
-                </div>
+                    <div class="int1">
+                        <h1>Create Flight Haul code</h1>
+                    </div>
 
                 
                         <div class="row">
                                 <div class="col-3 mt-5">
-                                <%= simple_form_for(@haul) do |f| %>
+                                   <%= simple_form_for(@haul) do |f| %>
                                         <div class="col-2.5">
                                             <%=  f.label :name,content_tag(:strong, 'Haul code:') %>
                                             <%=  f.text_field :name, class:"rounded-box"%>
@@ -45,7 +43,7 @@
                                                 <%=f.submit"Valider", class: "btn btn-primary"%>
                                             </div>   
                                         <br><br>
-                                            <span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+                                            <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
                                     <%end%>
                                 </div> 
                         </div>        

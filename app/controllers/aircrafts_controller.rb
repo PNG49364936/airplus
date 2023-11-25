@@ -13,7 +13,9 @@ class AircraftsController < ApplicationController
     end
 
     def new
-     @aircraft = Aircraft.new
+    @aircrafts = Aircraft.all
+    @aircraft = Aircraft.new
+    
     end
 
     def create 

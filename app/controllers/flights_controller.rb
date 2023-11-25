@@ -23,10 +23,13 @@ class FlightsController < ApplicationController
     @cabin = Cabin.first
     @seat = Seat.all
     @seat = Seat.first
+    @departure_station = Station.all
+    @arrival_station = Station.all
    
     @used_registrations = Flight.pluck(:registration_id)
     @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
     @available_registrations = Registration.where.not(reg: @used_registration_numbers)
+   
    
   end
 
@@ -57,7 +60,7 @@ class FlightsController < ApplicationController
   end
 
   def params_flight
-    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id)
+    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :station_id, :departure_station_id, :arrival_station_id)
   end
 
 

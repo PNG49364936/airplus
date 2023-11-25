@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_08_155440) do
+ActiveRecord::Schema.define(version: 2023_11_21_175412) do
 
   create_table "aircrafts", force: :cascade do |t|
     t.string "acft"
@@ -34,8 +34,12 @@ ActiveRecord::Schema.define(version: 2023_11_08_155440) do
     t.string "reg"
     t.string "haul"
     t.integer "haul_id"
+    t.integer "departure_station_id"
+    t.integer "arrival_station_id"
     t.index ["aircraft_id"], name: "index_flights_on_aircraft_id"
+    t.index ["arrival_station_id"], name: "index_flights_on_arrival_station_id"
     t.index ["cabin_id"], name: "index_flights_on_cabin_id"
+    t.index ["departure_station_id"], name: "index_flights_on_departure_station_id"
     t.index ["haul_id"], name: "index_flights_on_haul_id"
     t.index ["registration_id"], name: "index_flights_on_registration_id"
     t.index ["seat_id"], name: "index_flights_on_seat_id"
@@ -70,4 +74,6 @@ ActiveRecord::Schema.define(version: 2023_11_08_155440) do
   add_foreign_key "flights", "hauls"
   add_foreign_key "flights", "registrations"
   add_foreign_key "flights", "seats"
+  add_foreign_key "flights", "stations", column: "arrival_station_id"
+  add_foreign_key "flights", "stations", column: "departure_station_id"
 end

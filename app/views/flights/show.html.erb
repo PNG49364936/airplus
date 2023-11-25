@@ -1,8 +1,13 @@
-<div class="container">
-    <p><strong>Registration:</strong> <%= @flight.registration.reg %></p>
-    <p><strong>Aircraft type:</strong> <%= @flight.aircraft.acft %></p>
-    <p><strong>Haul network:</strong> <%= @flight.haul.name %></p>
-    <p><strong>Cabins letter:</strong> <%= @flight.cabin.cbn%></p>
-    <p><strong>Seatsbnumber:</strong> <%= @flight.seat.number%></p>
-<span><%=link_to"Home",root_path,class: "btn btn-primary" %></span> 
+<div class="container mt-10">  
+    <div class="row">  
+            <p><strong>Registration:</strong> <%= @flight.registration.reg %></p>
+            <p><strong>Aircraft type:</strong> <%= @flight.aircraft.acft %></p>
+            <p><strong>Haul network:</strong> <%= @flight.haul.name %></p>
+            <p><strong>Cabins letter:</strong> <%= @flight.cabin.cbn%></p>
+            <p><strong>Seats number:</strong> <%= @flight.seat.number%></p>
+            <p><strong>Departure station:</strong> <%= @flight.departure_station.name%></p>
+        
+
+            <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
+    </div>
 </div>
