@@ -23,21 +23,27 @@ class FlightsController < ApplicationController
     @cabin = Cabin.first
     @seat = Seat.all
     @seat = Seat.first
-    @departure_station = Station.all
-    @arrival_station = Station.all
+    @departure_stations = Station.all
+    @arrival_stations = Station.all
+    @stations = Station.all
+
    
     @used_registrations = Flight.pluck(:registration_id)
     @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
     @available_registrations = Registration.where.not(reg: @used_registration_numbers)
+
    
-   
+
+    
   end
 
   def create
+    puts "Parameters: #{params.inspect}"
     @flight = Flight.new(params_flight)
        if @flight.save
     redirect_to @flight, notice: 'Flight created.'
   else
+    puts @flight.errors.full_messages
     render :new
   end
   end

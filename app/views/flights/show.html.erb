@@ -6,7 +6,7 @@
             <p><strong>Cabins letter:</strong> <%= @flight.cabin.cbn%></p>
             <p><strong>Seats number:</strong> <%= @flight.seat.number%></p>
             <p><strong>Departure station:</strong> <%= @flight.departure_station.name%></p>
-        
+            <p><strong>Arrival station:</strong> <%= @flight.arrival_station.name%></p>
 
             <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
     </div>

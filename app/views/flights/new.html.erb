@@ -67,6 +67,7 @@
                     
                     <div class="seat form-group">
                         <%= f.label :seat_id, content_tag(:strong, "Cabin seats:") %>
+                       
                           <% if @seat.present? %>
                                 <%= f.collection_select :seat_id, Seat.all, :id, ->(seat) { "#{seat.number}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
                                 <% else %> 
@@ -82,13 +83,32 @@
 
                      <div class="departure_station form-group">
                         <%= f.label :station_id, content_tag(:strong, "Departure station:") %>
-                        <%= f.collection_select :departure_station_id, Station.all, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
+                   
+                          <% if @departure_stations.present? %>
+                        <%= f.collection_select :departure_station_id, @departure_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
+                          <% else %> 
+                                <div class="alert alert-danger" >
+                                    No Station available, create it.
+                                </div> 
+                                <div class="creation btn btn-primary " >
+                                    <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
+                                </div>
+                           <% end %> 
                     </div>
                     <br>
 
                     <div class="arrival_station form-group">
                         <%= f.label :station_id, content_tag(:strong, "Arrival station:") %>
-                        <%= f.collection_select :arrival_station_id, Station.all, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
+                          <% if @arrival_stations.present? %>
+                        <%= f.collection_select :arrival_station_id, @arrival_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
+                        <% else %> 
+                        <div class="alert alert-danger" >
+                            No Station available, create it.
+                        </div> 
+                        <div class="creation btn btn-primary " >
+                            <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
+                        </div>
+                   <% end %> 
                     </div>
                     <br>
                     

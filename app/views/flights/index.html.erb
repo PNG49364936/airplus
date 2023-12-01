@@ -7,23 +7,26 @@
            
              <thead>
                  <tr>
-                    <th>Registration</th>
-                    <th>Acft type</th>
-                    <th>Network</th>
-                    <th>Cabin</th>
-                    <th>Seats </th>
+                    <th class="text-center">Registration</th>
+                    <th class="text-center">Acft type</th>
+                    <th class="text-center">Network</th>
+                    <th class="text-center">Cabin</th>
+                    <th class="text-center">Seats</th>
+                    <th class="text-center">Departure station</th>
+                    <th class="text-center">Arrival station</th>
                  </tr>
              </thead>
  
                  <tbody>
                      <%  @flights.each do |flight| %>
                         <tr>
-                         <td><%= flight.registration.reg %></td>
-                         <td><%= flight.aircraft.acft %></td>
-                         <td><%= flight.haul.name %></td>
-                         <td><%= flight.cabin.cbn %></td>
-                         <td><%= flight.seat.number %></td>
-
+                            <td class="text-center"><%= flight.registration.reg %></td>
+                            <td class="text-center"><%= flight.aircraft.acft %></td>
+                            <td class="text-center"><%= flight.haul.name %></td>
+                            <td class="text-center"><%= flight.cabin.cbn %></td>
+                            <td class="text-center"><%= flight.seat.number %></td>
+                            <td class="text-center"><%= flight.departure_station.name %></td>
+                            <td class="text-center"><%= flight.arrival_station.name %></td>
                          <td>
                              <%=link_to"Annuler aircraft", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
                              
