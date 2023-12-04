@@ -18,7 +18,7 @@ class FlightsController < ApplicationController
     @aircraft = Aircraft.all
     @aircraft = Aircraft.first
     @haul = Haul.all
-    @haul = Haul.first
+   
     @cabin = Cabin.all
     @cabin = Cabin.first
     @seat = Seat.all
@@ -43,7 +43,18 @@ class FlightsController < ApplicationController
        if @flight.save
     redirect_to @flight, notice: 'Flight created.'
   else
-    puts @flight.errors.full_messages
+    @used_registrations = Flight.pluck(:registration_id)
+    @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
+    @available_registrations = Registration.where.not(reg: @used_registration_numbers)
+    @registration =  Registration.all
+    @aircraft = Aircraft.all
+    @haul = Haul.all
+    @cabin = Cabin.all
+    @seat = Seat.all
+    @departure_stations = Station.all
+    @arrival_stations = Station.all
+    
+
     render :new
   end
   end

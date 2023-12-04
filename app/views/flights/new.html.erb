@@ -1,4 +1,5 @@
 <div class="container col-12">
+    
     <div>
         <h1>Créer Flight Aircraft</h1>
     </div>
@@ -7,6 +8,8 @@
 
             
             <%= simple_form_for(@flight) do |f| %>
+           
+            <!--
                     <div class="registration form-group">
                         <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
                         <% if @available_registrations.present? %>
@@ -19,7 +22,19 @@
                                 <%= link_to "Créér des immatriculations", new_registration_path, class: "creer text-white" %>
                             </div>
                          <% end %> 
-                    </div>
+                    </div>-->
+                    <div class="registration form-group">
+                        <%= f.label :registration_id, "Registration:" %>
+                        <% if f.object.errors[:registration_id].any? %>
+                          <div class="alert alert-danger">
+                            <% f.object.errors[:registration_id].each do |error| %>
+                              <%= error %>
+                            <% end %>
+                          </div>
+                        <% end %>
+                        <%= f.collection_select :registration_id, @available_registrations, :id, :reg, { include_blank: "Choisir" }, { class: "form-control" } %>
+                      </div>
+                      
                     <br>
                     <div class="aircraft form-group">
                         <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
@@ -80,6 +95,13 @@
                            <% end %>  
                     </div>
                     <br>
+                    <% if f.object.errors[:base].any? %>
+                            <div class="alert alert-danger">
+                            <% f.object.errors[:base].each do |error| %>
+                                <%= error %>
+                            <% end %>
+                            </div>
+                    <% end %>
 
                      <div class="departure_station form-group">
                         <%= f.label :station_id, content_tag(:strong, "Departure station:") %>
@@ -96,7 +118,8 @@
                            <% end %> 
                     </div>
                     <br>
-
+                    
+                    <!--
                     <div class="arrival_station form-group">
                         <%= f.label :station_id, content_tag(:strong, "Arrival station:") %>
                           <% if @arrival_stations.present? %>
@@ -109,15 +132,33 @@
                             <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
                         </div>
                    <% end %> 
-                    </div>
-                    <br>
-                    
+                    </div>-->
+                   
+
+                    <div class="arrival_station form-group">
+                        <%= f.label :arrival_station_id, content_tag(:strong, "Arrival station:") %>
+                        <% if f.object.errors[:arrival_station_id].any? %>
+                          <div class="alert alert-danger">
+                            <% f.object.errors[:arrival_station_id].each do |error| %>
+                              <%= error %>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      
+                        <% if @arrival_stations.present? %>
+                          <%= f.collection_select :arrival_station_id, @arrival_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>
+                        <% else %>
+                          <div class="alert alert-danger">
+                            No arrival stations available, create them.
+                          </div>
+                        <% end %>
+                      </div>
 
                     
                                
                     <br>
                     
-                    <br><br>
+                    
 
                     <div class="submit">
                         <%=f.submit"Valider", class: "btn btn-primary"%>

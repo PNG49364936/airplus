@@ -4,6 +4,7 @@
              <thead>
                  <tr>
                      <td>Stations</td>
+                     <td>Haul</td>
                  </tr>
              </thead>
  
@@ -11,9 +12,10 @@
                      <%  @stations.each do |station| %>
                         <tr>
                             <td><%= station.name %></td>
+                            <td><%= station.haul %></td>
                          
                             <td>
-                                <%=link_to"Annuler seats", station_path(station),method: :delete, class: "btn btn-danger btn-margin"%>
+                                <%=link_to"Annuler STATION", station_path(station),method: :delete, class: "btn btn-danger btn-margin"%>
                                 
                             </td>
                         </tr>

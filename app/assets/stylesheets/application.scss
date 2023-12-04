@@ -1,4 +1,12 @@
 @import"bootstrap/scss/bootstrap";
 @import "pages/home";
 @import "pages/operations";
-@import "hauls/new"
+@import "hauls/new";
+
+.notice{
+    color: red
+}
+
+.alert{
+    color: red
+}

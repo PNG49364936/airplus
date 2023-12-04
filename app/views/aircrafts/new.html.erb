@@ -6,6 +6,7 @@
 
                     <h4>Aircraft(s) déjà créés :</h4>
                           <td><%= @aircrafts.map(&:acft).join(', ') %></td>
+                          
            <%else%>
                 <div class="alert alert-danger">
                     No aircraft, create it.
@@ -26,6 +27,13 @@
                             <%=  f.label :acft,content_tag(:strong, 'Aircraft type:') %>
                             <%=  f.text_field :acft, class:"rounded-box"%>
                         </div>
+                        <br><br>
+                        <div class="col-2.5">
+                            <%=  f.label :acft,content_tag(:strong, 'Aircraft haul:') %>
+                            <%=  f.text_field :haul, class:"rounded-box"%>
+                        </div>
+                        <br>
+                        
                         <br><br>
                         <div class="submit">
                             <%=f.submit"Valider", class: "btn btn-primary"%>

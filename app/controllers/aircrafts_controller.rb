@@ -50,7 +50,7 @@ class AircraftsController < ApplicationController
         end
 
         def params_aircraft
-            params.require(:aircraft).permit(:acft, :aircraft_class, :seats, :registration) # Liste des attributs que vous utilisez
+            params.require(:aircraft).permit(:acft, :aircraft_class, :seats, :registration, :haul) # Liste des attributs que vous utilisez
         end
     
 
