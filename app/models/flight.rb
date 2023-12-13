@@ -33,7 +33,7 @@ class Flight < ApplicationRecord
 
         # Vérifiez si les conditions spécifiées sont remplies
         if aircraft_haul_upcase == "MH" && flight_haul_upcase != "MH"
-            errors.add(:base, "Attention: Un avion avec un réseau de haul 'MH' ne peut effectuer que des vols de type 'MH'.")
+            errors.add(:base, "Attention: Un avion avec un réseau de haul 'MH' ne peut effectuer des vols LH'.")
           elsif aircraft_haul_upcase == "LH" && (flight_haul_upcase != "LH" && flight_haul_upcase != "MH")
             errors.add(:base, "Attention: Un avion avec un réseau de haul 'LH' ne peut effectuer que des vols de type 'LH' ou 'MH'.")
     end

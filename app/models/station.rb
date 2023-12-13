@@ -14,7 +14,7 @@ end
 def unique_name
     existing_name = Station.pluck(:name) # Récupère tous les numéros existants dans la base de données
     pp "test" *100
-    if existing_name.include?(name)
+    if existing_name.include?(name) && name != "CDG"
       errors.add(:name, ":  Le code #{self.name} est déjà utilisé.")
     end
   end

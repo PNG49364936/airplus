@@ -19,7 +19,7 @@ def create
         redirect_to @cabin, notice: 'Cabin was successfully created.'
         else
         render :new
-       end
+    end
 end
 
 def edit

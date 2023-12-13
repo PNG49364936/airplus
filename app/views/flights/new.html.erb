@@ -1,164 +1,166 @@
 <div class="container col-12">
     
-    <div>
-        <h1>Créer Flight Aircraft</h1>
-    </div>
-    <div class="row">
-        <div class="col-4 mt-5" >
+          <div>
+              <h1>Créer Flight Aircraft</h1>
+          </div>
+  
+  <div class="row">
+      <div class="col-4 mt-5" >
 
-            
-            <%= simple_form_for(@flight) do |f| %>
-           
-            <!--
-                    <div class="registration form-group">
-                        <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
-                        <% if @available_registrations.present? %>
-                            <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %> 
-                          <% else %>   
-                            <div class="alert alert-danger" >
-                                No Registration available, create it.
-                            </div>  
-                            <div class="creation btn btn-primary " >
-                                <%= link_to "Créér des immatriculations", new_registration_path, class: "creer text-white" %>
-                            </div>
-                         <% end %> 
-                    </div>-->
-                    <div class="registration form-group">
-                        <%= f.label :registration_id, "Registration:" %>
-                        <% if f.object.errors[:registration_id].any? %>
-                          <div class="alert alert-danger">
-                            <% f.object.errors[:registration_id].each do |error| %>
-                              <%= error %>
-                            <% end %>
-                          </div>
-                        <% end %>
-                        <%= f.collection_select :registration_id, @available_registrations, :id, :reg, { include_blank: "Choisir" }, { class: "form-control" } %>
-                      </div>
-                      
-                    <br>
-                    <div class="aircraft form-group">
-                        <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
-                        <% if @aircraft.present? %>
-                          <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
-                          <% else %> 
-                          <div class="alert alert-danger" >
-                            No Acft available, create it.
-                          </div> 
-                          <div class="creation btn btn-primary " >
-                            <%= link_to "Créér des immatriculations", new_aircraft_path, class: "creer text-white" %>
-                          </div>
-                          <% end %>  
-                    
-                        </div>
-                    <br>
-                    <div class="haul form-group">
-                        <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
-                          <% if @haul.present? %>
-                              <%= f.collection_select :haul_id, Haul.all, :id, ->(haul) { "#{haul.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
-                             <% else %> 
-                                    <div class="alert alert-danger" >
-                                        No Haul code available, create it.
-                                    </div> 
-                                    <div class="creation btn btn-primary " >
-                                        <%= link_to "Créér des haul codes", new_haul_path, class: "creer text-white" %>
-                                    </div>
-                          <% end %>
-                    </div>
-                    <br>
-                    <div class="cabin form-group">
-                        <%= f.label :cabin_id, content_tag(:strong, "Cabin:") %>
-                          <% if @cabin.present? %>
-                            <%= f.collection_select :cabin_id, Cabin.all, :id, ->(cabin) { "#{cabin.cbn}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
-                            <% else %> 
-                            <div class="alert alert-danger" >
-                                No Cabin code available, create it.
-                            </div> 
-                            <div class="creation btn btn-primary " >
-                                <%= link_to "Créér des Cabin codes", new_cabin_path, class: "creer text-white" %>
-                            </div>
-                          <% end %>  
-                    </div>
-                    <br>
-                    
-                    <div class="seat form-group">
-                        <%= f.label :seat_id, content_tag(:strong, "Cabin seats:") %>
-                       
-                          <% if @seat.present? %>
-                                <%= f.collection_select :seat_id, Seat.all, :id, ->(seat) { "#{seat.number}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
-                                <% else %> 
-                                <div class="alert alert-danger" >
-                                    No Seat volume available, create it.
-                                </div> 
-                                <div class="creation btn btn-primary " >
-                                    <%= link_to "Créér des nombres de sièges", new_seat_path, class: "creer text-white" %>
-                                </div>
-                           <% end %>  
-                    </div>
-                    <br>
-                    <% if f.object.errors[:base].any? %>
-                            <div class="alert alert-danger">
-                            <% f.object.errors[:base].each do |error| %>
+          
+          <%= simple_form_for(@flight) do |f| %>
+          <div data-controller="flight-form">
+              <% if f.object.errors[:base].any? %>
+                      <div class="alert alert-danger">
+                              <% f.object.errors[:base].each do |error| %>
                                 <%= error %>
-                            <% end %>
-                            </div>
-                    <% end %>
-
-                     <div class="departure_station form-group">
-                        <%= f.label :station_id, content_tag(:strong, "Departure station:") %>
-                   
-                          <% if @departure_stations.present? %>
-                        <%= f.collection_select :departure_station_id, @departure_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
-                          <% else %> 
-                                <div class="alert alert-danger" >
-                                    No Station available, create it.
-                                </div> 
-                                <div class="creation btn btn-primary " >
-                                    <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
-                                </div>
-                           <% end %> 
+                              <% end %>
+                      </div>
+              <% end %>
+         
+             <!--
+                  <div class="registration form-group">
+                      <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
+                      <% if @available_registrations.present? %>
+                          <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %> 
+                        <% else %>   
+                          <div class="alert alert-danger" >
+                              No Registration available, create it.
+                          </div>  
+                          <div class="creation btn btn-primary " >
+                              <%= link_to "Créér des immatriculations", new_registration_path, class: "creer text-white" %>
+                          </div>
+                       <% end %> 
+                  </div>-->
+                  <div class="registration form-group">
+                      <%= f.label :registration_id, "Registration:" %>
+                      <% if f.object.errors[:registration_id].any? %>
+                        <div class="alert alert-danger">
+                          <% f.object.errors[:registration_id].each do |error| %>
+                            <%= error %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                      <%= f.collection_select :registration_id, @available_registrations, :id, :reg, { include_blank: "Choisir" }, { class: "form-control" } %>
                     </div>
-                    <br>
                     
-                    <!--
-                    <div class="arrival_station form-group">
-                        <%= f.label :station_id, content_tag(:strong, "Arrival station:") %>
-                          <% if @arrival_stations.present? %>
-                        <%= f.collection_select :arrival_station_id, @arrival_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
+                  <br>
+                  <div class="aircraft form-group">
+                      <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
+                      <% if @aircraft.present? %>
+                        <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
                         <% else %> 
                         <div class="alert alert-danger" >
-                            No Station available, create it.
+                          No Acft available, create it.
                         </div> 
                         <div class="creation btn btn-primary " >
-                            <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
+                          <%= link_to "Créér des immatriculations", new_aircraft_path, class: "creer text-white" %>
                         </div>
-                   <% end %> 
-                    </div>-->
-                   
+                        <% end %>  
+                  
+                      </div>
+                  <br>
+                  <div class="haul form-group">
+                      <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
+                        <% if @haul.present? %>
+                        <%= f.collection_select :haul_id, Haul.all, :id, :name, {}, { class: "form-control", data: { action: "change->flight-form#updateStations", flight_form_target: "flightHaul" } } %>
+                           <% else %> 
+                                  <div class="alert alert-danger" >
+                                      No Haul code available, create it.
+                                  </div> 
+                                  <div class="creation btn btn-primary " >
+                                      <%= link_to "Créér des haul codes", new_haul_path, class: "creer text-white" %>
+                                  </div>
+                        <% end %>
+                  </div>
+                  <br>
+                  <div class="cabin form-group">
+                      <%= f.label :cabin_id, content_tag(:strong, "Cabin:") %>
+                        <% if @cabin.present? %>
+                          <%= f.collection_select :cabin_id, Cabin.all, :id, ->(cabin) { "#{cabin.cbn}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                          <% else %> 
+                          <div class="alert alert-danger" >
+                              No Cabin code available, create it.
+                          </div> 
+                          <div class="creation btn btn-primary " >
+                              <%= link_to "Créér des Cabin codes", new_cabin_path, class: "creer text-white" %>
+                          </div>
+                        <% end %>  
+                  </div>
+                  <br>
+                  
+                  <div class="seat form-group">
+                      <%= f.label :seat_id, content_tag(:strong, "Cabin seats:") %>
+                     
+                        <% if @seat.present? %>
+                              <%= f.collection_select :seat_id, Seat.all, :id, ->(seat) { "#{seat.number}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                              <% else %> 
+                              <div class="alert alert-danger" >
+                                  No Seat volume available, create it.
+                              </div> 
+                              <div class="creation btn btn-primary " >
+                                  <%= link_to "Créér des nombres de sièges", new_seat_path, class: "creer text-white" %>
+                              </div>
+                         <% end %>  
+                  </div>
+                  <br>
+                 <!--JAVA SCRIPT-->
+             
+                   <div class="departure_station form-group">
+                      <%= f.label :station_id, content_tag(:strong, "Departure station:") %>
+                 
+                        <% if @departure_stations.present? %>
+                        <%= f.collection_select :departure_station_id, [], :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { flight_form_target: "departureStation" } } %>
+                        <% else %> 
+                              <div class="alert alert-danger" >
+                                  No Station available, create it.
+                              </div> 
+                              <div class="creation btn btn-primary " >
+                                  <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
+                              </div>
+                         <% end %> 
+                    </div>
+                  <br>
+                  
+                  <!--
+                  <div class="arrival_station form-group">
+                      <%= f.label :station_id, content_tag(:strong, "Arrival station:") %>
+                        <% if @arrival_stations.present? %>
+                      <%= f.collection_select :arrival_station_id, @arrival_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>     
+                      <% else %> 
+                      <div class="alert alert-danger" >
+                          No Station available, create it.
+                      </div> 
+                      <div class="creation btn btn-primary " >
+                          <%= link_to "Créér Stations", new_station_path, class: "creer text-white" %>
+                      </div>
+                 <% end %> 
+                  </div>-->
+                 
 
                     <div class="arrival_station form-group">
-                        <%= f.label :arrival_station_id, content_tag(:strong, "Arrival station:") %>
-                        <% if f.object.errors[:arrival_station_id].any? %>
-                          <div class="alert alert-danger">
-                            <% f.object.errors[:arrival_station_id].each do |error| %>
-                              <%= error %>
-                            <% end %>
-                          </div>
-                        <% end %>
-                      
-                        <% if @arrival_stations.present? %>
-                          <%= f.collection_select :arrival_station_id, @arrival_stations, :id, ->(station) { "#{station.name}" }, { include_blank: "Choisir" }, { class: "form-control" } %>
-                        <% else %>
-                          <div class="alert alert-danger">
-                            No arrival stations available, create them.
-                          </div>
-                        <% end %>
-                      </div>
+                      <%= f.label :arrival_station_id, content_tag(:strong, "Arrival station:") %>
+                      <% if f.object.errors[:arrival_station_id].any? %>
+                        <div class="alert alert-danger">
+                          <% f.object.errors[:arrival_station_id].each do |error| %>
+                            <%= error %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                      <% if @arrival_stations.present? %>
+                      <%= f.collection_select :arrival_station_id, [], :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { flight_form_target: "arrivalStation" } } %>
+                      <% else %>
+                        <div class="alert alert-danger">
+                          No arrival stations available, create them.
+                        </div>
+                      <% end %>
+                    </div>
 
-                    
-                               
+             </div>
+                             
                     <br>
-                    
-                    
+                  
+                  
 
                     <div class="submit">
                         <%=f.submit"Valider", class: "btn btn-primary"%>
@@ -166,9 +168,9 @@
                     </div>
 
 
-            <% end %>
-        </div>
-        
-    </div>
+          <% end %>
+      </div>
+      
+  </div>
 
 </div> 

@@ -70,6 +70,19 @@ class FlightsController < ApplicationController
   def update
   end
 
+  def stations
+    flight_haul_id = params[:flight_haul]
+  haul = Haul.find_by(id: flight_haul_id)
+
+  if haul
+    @stations = Station.where(haul: haul.name)
+  else
+    @stations = Station.none
+  end
+
+  render json: { stations: @stations.select(:id, :name).map(&:attributes) }
+  end
+
   private
 
   def set_flight

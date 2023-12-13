@@ -1,0 +1,2 @@
+class FlightNumber < ApplicationRecord
+end
