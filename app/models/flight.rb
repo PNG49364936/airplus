@@ -9,6 +9,10 @@ class Flight < ApplicationRecord
     belongs_to :arrival_station, class_name: 'Station', foreign_key: 'arrival_station_id'
     validate :unique_station
     validate :check_haul
+    validates :registration, :aircraft, :haul, :cabin, :seat, :departure_station, :arrival_station, :airline_code, :flight_number, presence: true
+   
+    before_validation :upcase_airline_code
+    validates :airline_code, length: { within: 2..2, message: "doit contenir 2 lettres maxi"}
     private
     def unique_station
         if  arrival_station_id == departure_station_id
@@ -40,4 +44,9 @@ class Flight < ApplicationRecord
        end
 
    
+       
+
+         def upcase_airline_code 
+            self.airline_code = airline_code.upcase if airline_code.present?
+         end
 end

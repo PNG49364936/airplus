@@ -7,6 +7,8 @@
            
              <thead>
                  <tr>
+                    <th class="text-center">Airline_code</th>
+                    <th class="text-center">Flight number</th>
                     <th class="text-center">Registration</th>
                     <th class="text-center">Acft type</th>
                     <th class="text-center">Network</th>
@@ -20,6 +22,8 @@
                  <tbody>
                      <%  @flights.each do |flight| %>
                         <tr>
+                            <td class="text-center"><%= flight.airline_code %></td>
+                            <td class="text-center"><%= flight.flight_number %></td>
                             <td class="text-center"><%= flight.registration.reg %></td>
                             <td class="text-center"><%= flight.aircraft.acft %></td>
                             <td class="text-center"><%= flight.haul.name %></td>

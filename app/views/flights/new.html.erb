@@ -1,11 +1,22 @@
 <div class="container col-12">
+  <% if @flight.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@flight.errors.count, "error") %> prohibited this flight from being saved:</h2>
+
+    <ul>
+      <% @flight.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
     
           <div>
               <h1>Créer Flight Aircraft</h1>
           </div>
   
   <div class="row">
-      <div class="col-4 mt-5" >
+      <div class="col-3 mt-5" >
 
           
           <%= simple_form_for(@flight) do |f| %>
@@ -17,7 +28,19 @@
                               <% end %>
                       </div>
               <% end %>
-         
+              <div class="airline_code form-group ">
+                <%=  f.label :airline_code,content_tag(:strong, 'Airline code:') %>
+                
+                <%=  f.text_field :airline_code, class:"custom-width"%>
+              </div>
+              <br>
+              <div class="airline_code form-group ">
+                <%=  f.label :flight_number,content_tag(:strong, 'Flight number:') %>
+                
+                <%=  f.text_field :flight_number, class:"custom-width"%>
+              </div>
+              
+              <br>
              <!--
                   <div class="registration form-group">
                       <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
@@ -32,16 +55,33 @@
                           </div>
                        <% end %> 
                   </div>-->
+                  <div class="haul form-group">
+                      <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
+                        <% if @haul.present? %>
+                        <%= f.collection_select :haul_id, Haul.all, :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { action: "change->flight-form#updateStations", flight_form_target: "flightHaul" },class:"custom-width-a" } %>
+
+                           <% else %> 
+                                  <div class="alert alert-danger" >
+                                      No Haul code available, create it.
+                                  </div> 
+                                  <div class="creation btn btn-primary " >
+                                      <%= link_to "Créér des haul codes", new_haul_path, class: "creer text-white" %>
+                                  </div>
+                        <% end %>
+                  </div>
+                  <br>
                   <div class="registration form-group">
-                      <%= f.label :registration_id, "Registration:" %>
-                      <% if f.object.errors[:registration_id].any? %>
-                        <div class="alert alert-danger">
-                          <% f.object.errors[:registration_id].each do |error| %>
-                            <%= error %>
-                          <% end %>
+                    <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
+                    <% if @available_registrations.present? %>
+                        <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %> 
+                      <% else %>   
+                        <div class="alert alert-danger" >
+                            No Registration available, create it.
+                        </div>  
+                        <div class="creation btn btn-primary " >
+                            <%= link_to "Créér des immatriculations", new_registration_path, class: "creer text-white" %>
                         </div>
-                      <% end %>
-                      <%= f.collection_select :registration_id, @available_registrations, :id, :reg, { include_blank: "Choisir" }, { class: "form-control" } %>
+                     <% end %> 
                     </div>
                     
                   <br>
@@ -60,24 +100,12 @@
                   
                       </div>
                   <br>
-                  <div class="haul form-group">
-                      <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
-                        <% if @haul.present? %>
-                        <%= f.collection_select :haul_id, Haul.all, :id, :name, {}, { class: "form-control", data: { action: "change->flight-form#updateStations", flight_form_target: "flightHaul" } } %>
-                           <% else %> 
-                                  <div class="alert alert-danger" >
-                                      No Haul code available, create it.
-                                  </div> 
-                                  <div class="creation btn btn-primary " >
-                                      <%= link_to "Créér des haul codes", new_haul_path, class: "creer text-white" %>
-                                  </div>
-                        <% end %>
-                  </div>
-                  <br>
+                 
+                 
                   <div class="cabin form-group">
                       <%= f.label :cabin_id, content_tag(:strong, "Cabin:") %>
                         <% if @cabin.present? %>
-                          <%= f.collection_select :cabin_id, Cabin.all, :id, ->(cabin) { "#{cabin.cbn}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                          <%= f.collection_select :cabin_id, Cabin.all, :id, ->(cabin) { "#{cabin.cbn}" }, { include_blank: "Choisir" }, { class: "form-control",class:"custom-width-a" } %>         
                           <% else %> 
                           <div class="alert alert-danger" >
                               No Cabin code available, create it.
@@ -93,7 +121,7 @@
                       <%= f.label :seat_id, content_tag(:strong, "Cabin seats:") %>
                      
                         <% if @seat.present? %>
-                              <%= f.collection_select :seat_id, Seat.all, :id, ->(seat) { "#{seat.number}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                              <%= f.collection_select :seat_id, Seat.all, :id, ->(seat) { "#{seat.number}" }, { include_blank: "Choisir" }, { class: "form-control",class:"custom-width-a" } %>         
                               <% else %> 
                               <div class="alert alert-danger" >
                                   No Seat volume available, create it.
@@ -110,7 +138,7 @@
                       <%= f.label :station_id, content_tag(:strong, "Departure station:") %>
                  
                         <% if @departure_stations.present? %>
-                        <%= f.collection_select :departure_station_id, [], :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { flight_form_target: "departureStation" } } %>
+                        <%= f.collection_select :departure_station_id, [], :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { flight_form_target: "departureStation" },class:"custom-width-a" } %>
                         <% else %> 
                               <div class="alert alert-danger" >
                                   No Station available, create it.
@@ -148,7 +176,7 @@
                         </div>
                       <% end %>
                       <% if @arrival_stations.present? %>
-                      <%= f.collection_select :arrival_station_id, [], :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { flight_form_target: "arrivalStation" } } %>
+                      <%= f.collection_select :arrival_station_id, [], :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { flight_form_target: "arrivalStation" },class:"custom-width-a" } %>
                       <% else %>
                         <div class="alert alert-danger">
                           No arrival stations available, create them.
