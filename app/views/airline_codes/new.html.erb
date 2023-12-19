@@ -1,0 +1,53 @@
+<div class="container col-12">
+    <div class="bordered">
+      
+        <% if @airlinecodes.present? %>
+
+                    <h4>Code(s) déjà créés :</h4>
+                        <td><%= @airlinecodes.map(&:code).join(', ') %></td>
+        <%else%>
+                <div class="alert alert-danger">
+                    No airline code, create it.
+                   
+                </div>
+        <% end %>
+    </div>
+     <div>
+           <% if @airlinecode.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@airlinecode.errors.count, "error") %> </h2>
+                    <ul>
+                        <% @airlinecode.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+     </div>   
+<div class="int1">
+<h1>Create Airline code</h1>
+</div>
+<div class="row">
+   <div class="col-3 mt-5">
+    <%= simple_form_for(@airlinecode) do |f| %>
+        <div class="col-2.5">
+            <%=  f.label :code,content_tag(:strong, 'Airline code:') %>
+            <%=  f.text_field :code, class:"rounded-box"%>
+        </div>
+        <br><br>
+            <div class="submit">
+                <%=f.submit"Valider", class: "btn btn-primary"%>
+            </div>   
+            <br><br>
+            <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
+    <%end%>
+</div>
+
+
+
+
+
+
+
+
+</div>

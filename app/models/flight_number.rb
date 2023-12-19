@@ -1,2 +1,0 @@
-class FlightNumber < ApplicationRecord
-end

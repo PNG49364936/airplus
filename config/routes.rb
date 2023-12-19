@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resources :flights
   resources :hauls
   resources :stations
-  resources :flight_numbers
+  resources :airline_codes
 
   
   

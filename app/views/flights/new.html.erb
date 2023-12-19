@@ -73,7 +73,7 @@
                   <div class="registration form-group">
                     <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
                     <% if @available_registrations.present? %>
-                        <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %> 
+                        <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" ,  class: "form-control" } %> 
                       <% else %>   
                         <div class="alert alert-danger" >
                             No Registration available, create it.
@@ -88,7 +88,7 @@
                   <div class="aircraft form-group">
                       <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
                       <% if @aircraft.present? %>
-                        <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" }, { class: "form-control" } %>         
+                        <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" ,  class: "form-control" } %>         
                         <% else %> 
                         <div class="alert alert-danger" >
                           No Acft available, create it.

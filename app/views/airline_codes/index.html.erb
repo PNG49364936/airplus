@@ -1,0 +1,27 @@
+<div class="container mt-10">
+    <div class="row">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <td>Airline code</td>
+                    
+                 </tr>
+             </thead>
+ 
+                 <tbody>
+                     <%  @airlinecodes.each do |airlinecode| %>
+                     <tr>
+                         <td><%= airlinecode.code %></td>
+                         
+                         <td>
+                             <%=link_to"Annuler Airline code", airline_code_path(airlinecode),method: :delete, class: "btn btn-danger btn-margin"%>
+                             
+                         </td>
+                     </tr>
+                      <% end %>
+                    
+                 </tbody>
+ 
+         </table>
+ 
+         <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
