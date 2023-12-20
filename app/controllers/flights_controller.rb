@@ -26,6 +26,10 @@ class FlightsController < ApplicationController
     @departure_stations = Station.all
     @arrival_stations = Station.all
     @stations = Station.all
+    @airline_codes = AirlineCode.all
+   
+   
+
 
    
     @used_registrations = Flight.pluck(:registration_id)
@@ -55,7 +59,9 @@ class FlightsController < ApplicationController
     @seat = Seat.all
     @departure_stations = Station.all
     @arrival_stations = Station.all
+    @airline_codes = AirlineCode.all
     
+   
 
     render :new
   end
@@ -92,7 +98,7 @@ class FlightsController < ApplicationController
   end
 
   def params_flight
-    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :airline_code, :flight_number)
+    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id)
   end
 
 

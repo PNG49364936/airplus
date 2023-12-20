@@ -29,12 +29,21 @@
                       </div>
               <% end %>
               <div class="airline_code form-group ">
-                <%=  f.label :airline_code,content_tag(:strong, 'Airline code:') %>
-                
-                <%=  f.text_field :airline_code, class:"custom-width"%>
+                <%= f.label :airline_code, content_tag(:strong, 'Airline code:') %>
+                <% if @airline_codes.present? %>
+                  <%= f.collection_select :airline_code_id, @airline_codes, :id, :code, { include_blank: t('select'), class: "form-control" } %> 
+                <% else %> 
+                  <div class="alert alert-danger">
+                    <%= t('no_airline_code_available') %>
+                  </div> 
+                  <div class="creation btn btn-primary">
+                    <%= link_to t('create_airline_codes'), new_airline_code_path, class: "creer text-white" %>
+                  </div>
+                <% end %>
               </div>
+              
               <br>
-              <div class="airline_code form-group ">
+              <div class="flight_number form-group ">
                 <%=  f.label :flight_number,content_tag(:strong, 'Flight number:') %>
                 
                 <%=  f.text_field :flight_number, class:"custom-width"%>

@@ -1,27 +1,23 @@
 <div class="container mt-10">
     <div class="row">
-         <table class="table">
-             <thead>
-                 <tr>
-                     <td>Airline code</td>
-                    
-                 </tr>
-             </thead>
- 
-                 <tbody>
-                     <%  @airlinecodes.each do |airlinecode| %>
-                     <tr>
-                         <td><%= airlinecode.code %></td>
-                         
-                         <td>
-                             <%=link_to"Annuler Airline code", airline_code_path(airlinecode),method: :delete, class: "btn btn-danger btn-margin"%>
-                             
-                         </td>
-                     </tr>
-                      <% end %>
-                    
-                 </tbody>
- 
-         </table>
- 
-         <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Airline code</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% @airline_codes.each do |airline_code| %>
+                <tr>
+                    <td><%= airline_code.code %></td>
+                    <td>
+                        <%= link_to "Delete Airline Code", airline_code_path(airline_code), method: :delete, class: "btn btn-danger btn-margin" %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+
+        <span><%= link_to "Home", pages_operations_path, class: "btn btn-primary" %></span>
+    </div>
+</div>

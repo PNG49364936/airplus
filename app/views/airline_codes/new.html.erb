@@ -1,10 +1,10 @@
 <div class="container col-12">
     <div class="bordered">
       
-        <% if @airlinecodes.present? %>
+        <% if @airline_codes.present? %>
 
                     <h4>Code(s) déjà créés :</h4>
-                        <td><%= @airlinecodes.map(&:code).join(', ') %></td>
+                        <td><%= @airline_codes.map(&:code).join(', ') %></td>
         <%else%>
                 <div class="alert alert-danger">
                     No airline code, create it.
@@ -13,11 +13,11 @@
         <% end %>
     </div>
      <div>
-           <% if @airlinecode.errors.any? %>
+           <% if @airline_code.errors.any? %>
                 <div id="error_explanation">
-                    <h2><%= pluralize(@airlinecode.errors.count, "error") %> </h2>
+                    <h2><%= pluralize(@airline_code.errors.count, "error") %> </h2>
                     <ul>
-                        <% @airlinecode.errors.full_messages.each do |message| %>
+                        <% @airline_code.errors.full_messages.each do |message| %>
                             <li><%= message %></li>
                         <% end %>
                     </ul>
@@ -29,7 +29,7 @@
 </div>
 <div class="row">
    <div class="col-3 mt-5">
-    <%= simple_form_for(@airlinecode) do |f| %>
+    <%= simple_form_for(@airline_code) do |f| %>
         <div class="col-2.5">
             <%=  f.label :code,content_tag(:strong, 'Airline code:') %>
             <%=  f.text_field :code, class:"rounded-box"%>
