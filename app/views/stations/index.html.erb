@@ -5,6 +5,7 @@
                  <tr>
                      <td>Stations</td>
                      <td>Haul</td>
+                     <td>Airport name</td>
                  </tr>
              </thead>
  
@@ -13,6 +14,7 @@
                         <tr>
                             <td><%= station.name %></td>
                             <td><%= station.haul %></td>
+                            <td><%= station.airport_name %></td>
                          
                             <td>
                                 <%=link_to"Annuler STATION", station_path(station),method: :delete, class: "btn btn-danger btn-margin"%>

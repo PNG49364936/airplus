@@ -12,11 +12,16 @@
         </div>
     <% end %> 
 
-        <div class="col-3 mt-5">
+        <div class="col-6 mt-5">
             <%= simple_form_for(@station) do |f| %>
                         <div class="col-2.5">
                             <%=  f.label :name,content_tag(:strong, 'Station:') %>
                             <%=  f.text_field :name, class:"rounded-box"%>
+                        </div>
+                        <br>
+                        <div class="col-2.5">
+                            <%=  f.label :airport_name,content_tag(:strong, 'Airport name:') %>
+                            <%=  f.text_field :airport_name, class:"rounded-box"%>
                         </div>
                         <br>
                         <div class="col-2.5">

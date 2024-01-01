@@ -6,6 +6,7 @@ class FlightsController < ApplicationController
   def index
     @flights = Flight.all
     @aircrafts = Aircraft.all
+ 
   end
 
   def show
@@ -47,12 +48,13 @@ class FlightsController < ApplicationController
        if @flight.save
     redirect_to @flight, notice: 'Flight created.'
   else
-    
+    #definir @used_registrations
     @used_registrations = Flight.pluck(:registration_id)
     @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
     @available_registrations = Registration.where.not(reg: @used_registration_numbers)
-    puts "@available_registrations: #{@available_registrations.inspect}"
+    puts "@available_registrations********: #{@available_registrations.inspect}"
     @registration =  Registration.all
+    #@others
     @aircraft = Aircraft.all
     @haul = Haul.all
     @cabin = Cabin.all
@@ -60,6 +62,8 @@ class FlightsController < ApplicationController
     @departure_stations = Station.all
     @arrival_stations = Station.all
     @airline_codes = AirlineCode.all
+
+   
     
    
 
@@ -98,7 +102,7 @@ class FlightsController < ApplicationController
   end
 
   def params_flight
-    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id)
+    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id, :airport_name)
   end
 
 

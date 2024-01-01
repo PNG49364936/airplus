@@ -22,7 +22,7 @@
                  <tbody>
                      <%  @flights.each do |flight| %>
                         <tr>
-                            <td class="text-center"><%= flight.airline_code %></td>
+                            <td class="text-center"><%= flight.airline_code.code %></td>
                             <td class="text-center"><%= flight.flight_number %></td>
                             <td class="text-center"><%= flight.registration.reg %></td>
                             <td class="text-center"><%= flight.aircraft.acft %></td>

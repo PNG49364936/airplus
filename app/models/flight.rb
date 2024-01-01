@@ -11,8 +11,9 @@ class Flight < ApplicationRecord
     validate :unique_station
     validate :check_haul
     validates :registration, :aircraft, :haul, :cabin, :seat, :departure_station, :arrival_station, :airline_code, :flight_number, presence: true
-   
-  
+    validate :unique_flight_number_for_airline
+    validate :validate_flight_number_length
+    validate :validate_flight_number_odd_even
     
     private
     def unique_station
@@ -42,6 +43,31 @@ class Flight < ApplicationRecord
           elsif aircraft_haul_upcase == "LH" && (flight_haul_upcase != "LH" && flight_haul_upcase != "MH")
             errors.add(:base, "Attention: Un avion avec un réseau de haul 'LH' ne peut effectuer que des vols de type 'LH' ou 'MH'.")
     end
+       end
+
+       def unique_flight_number_for_airline
+            if Flight.exists?(airline_code_id: airline_code_id, flight_number: flight_number)
+            errors.add(:flight_number, "has already been taken for this airline code")
+            end
+       end
+
+       def validate_flight_number_length
+            return unless flight_number.present?
+        
+            flight_number_str = flight_number.to_s
+            if haul.name == 'LH' && flight_number_str.length != 3
+            errors.add(:flight_number, 'must be 3 digits for LH haul')
+            elsif haul.name != 'LH' && flight_number_str.length != 4
+            errors.add(:flight_number, 'must be 4 digits for other hauls')
+            end
+        end
+
+       def validate_flight_number_odd_even 
+            if departure_station.name == "CDG" && flight_number.odd?
+                errors.add(:flight_number," must be even")
+                elsif arrival_station.name == "CDG" && flight_number.even?
+                    errors.add(:flight_number,"must be odd")
+            end
        end
 
    
