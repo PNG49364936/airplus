@@ -41,7 +41,7 @@ class StationsController < ApplicationController
         end
 
         def params_station 
-            params.require(:station).permit(:name, :haul, :airport_name)
+            params.require(:station).permit(:name, :haul, :place_name)
         end
 
 end

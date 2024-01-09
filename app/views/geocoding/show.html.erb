@@ -1,0 +1,8 @@
+
+<% if @coordinates %>
+  <p> Latitude: <%= @coordinates[1] %>, Longitude: <%= @coordinates[0] %> de <%= @place_name %></p>
+<% else %>
+  <p>Aucune coordonnée trouvée pour le lieu spécifié.</p>
+<% end %>
+
+

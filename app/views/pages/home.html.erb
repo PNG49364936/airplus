@@ -21,28 +21,28 @@
             
 
             
-                        <script>
-                        mapboxgl.accessToken = "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg";
-                        const map = new mapboxgl.Map({
-                         container: 'map',
-                        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+                <script>
+                    mapboxgl.accessToken = "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg";
+                    
+                    // Définir les coordonnées une seule fois
+                    const coordinates = [2.549324, 49.008468];
+                
+                    // Créer la carte
+                    const map = new mapboxgl.Map({
+                        container: 'map',
                         style: 'mapbox://styles/mapbox/streets-v12',
-                        center: [2.549324,49.008468],
+                        center: coordinates,
                         zoom: 8
-                        });
-                        // add a marker
-                        new mapboxgl.Marker({
-                        // changer echelle
+                    });
+                
+                    // Ajouter un marqueur
+                    new mapboxgl.Marker({
                         scale: 0.6,
-                        //changer couleur
-                        color: '#fc0339'               })
-                        .setLngLat([2.549324,49.008468])
-                        .addTo(map);
-
-                        //new
-                        
-
-                        </script>
+                        color: '#fc0339'
+                    })
+                    .setLngLat(coordinates)
+                    .addTo(map);
+                </script>
            
         </div> 
 </body>

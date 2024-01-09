@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get 'flights/stations', to: 'flights#stations'
 
-
-
+  get 'geocoding/show', to: 'geocoding#show'
+  get 'geocoding/geocode', to: 'geocoding#geocode'
   get 'flights/index'
   get 'flights/show'
   get 'flights/new'
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'registrations/destroy'
   get 'pages/operations'
   root to: 'pages#home'
+ 
 
   resources :aircrafts
   resources :cabins
@@ -27,7 +28,10 @@ Rails.application.routes.draw do
   resources :flights
   resources :hauls
   resources :stations
+
+  
   resources :airline_codes
+
 
   
   

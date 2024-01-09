@@ -14,6 +14,8 @@ class Flight < ApplicationRecord
     validate :unique_flight_number_for_airline
     validate :validate_flight_number_length
     validate :validate_flight_number_odd_even
+    belongs_to :departure_station, class_name: 'Station', optional: true
+    belongs_to :arrival_station, class_name: 'Station', optional: true
     
     private
     def unique_station

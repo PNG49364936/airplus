@@ -4,6 +4,9 @@ class Station < ApplicationRecord
     validates :name, length: { within: 3..3 }
     validates :name,presence: true
     validate :unique_name
+ 
+    has_many :flights, class_name: 'Flight', foreign_key: 'departure_station_id'
+    has_many :flights, class_name: 'Flight', foreign_key: 'arrival_station_id'
 
 private
 
