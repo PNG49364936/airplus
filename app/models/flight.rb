@@ -5,8 +5,6 @@ class Flight < ApplicationRecord
     belongs_to :haul
     belongs_to :cabin
     belongs_to :seat
-    belongs_to :departure_station, class_name: 'Station', foreign_key: 'departure_station_id'
-    belongs_to :arrival_station, class_name: 'Station', foreign_key: 'arrival_station_id'
     belongs_to :airline_code
     validate :unique_station
     validate :check_haul
@@ -14,8 +12,10 @@ class Flight < ApplicationRecord
     validate :unique_flight_number_for_airline
     validate :validate_flight_number_length
     validate :validate_flight_number_odd_even
-    belongs_to :departure_station, class_name: 'Station', optional: true
-    belongs_to :arrival_station, class_name: 'Station', optional: true
+    #belongs_to :departure_station, class_name: 'Station', optional: true
+    #belongs_to :arrival_station, class_name: 'Station', optional: true
+    belongs_to :departure_station, class_name: 'Station', foreign_key: 'departure_station_id', optional: true
+    belongs_to :arrival_station, class_name: 'Station', foreign_key: 'arrival_station_id', optional: true
     
     private
     def unique_station

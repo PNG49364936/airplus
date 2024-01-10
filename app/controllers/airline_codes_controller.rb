@@ -24,8 +24,13 @@ class AirlineCodesController < ApplicationController
     end 
   
     def destroy
-      @airline_code.destroy
-      redirect_to airline_codes_url, notice: "Airline code destroyed"
+      if @airline_code.flights.any?
+        flash[:alert] = "This airline code is used by flights and cannot be deleted."
+        else
+          @airline_code.destroy
+          flash[:notice] = "Airline code was successfully deleted."
+      end
+      redirect_to airline_codes_url
     end
   
     private

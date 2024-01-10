@@ -5,9 +5,8 @@ class Station < ApplicationRecord
     validates :name,presence: true
     validate :unique_name
  
-    has_many :flights, class_name: 'Flight', foreign_key: 'departure_station_id'
-    has_many :flights, class_name: 'Flight', foreign_key: 'arrival_station_id'
-
+    has_many :departure_flights, class_name: 'Flight', foreign_key: 'departure_station_id'
+    has_many :arrival_flights, class_name: 'Flight', foreign_key: 'arrival_station_id'
 private
 
 def upcase_name

@@ -28,8 +28,14 @@ class SeatsController < ApplicationController
   end
 
   def destroy
-    @seat.destroy
-    redirect_to seats_url, notice: 'Seats was successfully destroyed.'
+    if @seat.flights.any?
+      flash[:alert] = "This seat configuration is used by flights and cannot be deleted."
+      else
+        @seat.destroy
+        flash[:notice] = "Seat configuration was successfully deleted."
+    end
+    redirect_to registrations_url
+    
   end
 
   private

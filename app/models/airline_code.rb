@@ -3,6 +3,7 @@ class AirlineCode < ApplicationRecord
     validate :unique_code
     validates :code, length: { within: 2..2 }
     validates :code, presence: true
+    has_many :flights, dependent: :destroy
 
 
 

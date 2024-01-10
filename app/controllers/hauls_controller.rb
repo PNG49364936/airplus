@@ -30,8 +30,13 @@ def upgrade
 end
 
 def destroy
-    @haul.destroy
-    redirect_to hauls_url, notice: "Haul destroyed"
+    if @haul.flights.any?
+        flash[:alert] = "This haul is used by flights and cannot be deleted."
+        else
+          @haul.destroy
+          flash[:notice] = "Haul was successfully deleted."
+      end
+      redirect_to hauls_url
 
 end
 

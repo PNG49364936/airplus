@@ -39,8 +39,16 @@ class AircraftsController < ApplicationController
     end
 
     def destroy
-        @aircraft.destroy
-        redirect_to aircrafts_url, notice: 'Aircraft was successfully destroyed.'
+      
+            pp "A"*100
+                if @aircraft.flights.any?
+                  flash[:alert] = "This aircraft is used by flights and cannot be deleted."
+                  else
+                    @aircraft.destroy
+                    flash[:notice] = "Aircraft type was successfully deleted."
+                end
+                redirect_to aircrafts_url
+             
     end
 
     private

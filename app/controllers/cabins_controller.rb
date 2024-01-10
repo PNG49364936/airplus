@@ -29,8 +29,13 @@ def update
 end
 
 def destroy
-    @cabin.destroy
-    redirect_to cabins_url, notice: 'Cabin was successfully destroyed.'
+    if @cabin.flights.any?
+        flash[:alert] = "This cabin is used by flights and cannot be deleted."
+        else
+          @cabin.destroy
+          flash[:notice] = "Cabin was successfully deleted."
+      end
+      redirect_to cabins_url
 end
 
 
