@@ -15,13 +15,18 @@
         <div class="col-6 mt-5">
             <%= simple_form_for(@station) do |f| %>
                         <div class="col-2.5">
-                            <%=  f.label :name,content_tag(:strong, 'Station:') %>
+                            <%=  f.label :name,content_tag(:strong, 'Airport code:') %>
                             <%=  f.text_field :name, class:"rounded-box"%>
                         </div>
                         <br>
                         <div class="col-2.5">
                             <%=  f.label :place_name,content_tag(:strong, 'Town name:') %>
                             <%=  f.text_field :place_name, class:"rounded-box"%>
+                        </div>
+                        <br>
+                        <div class="col-2.5">
+                            <%=  f.label :country_name,content_tag(:strong, 'Country name:') %>
+                            <%=  f.text_field :country_name, class:"rounded-box"%>
                         </div>
                         <br>
                         <div class="col-2.5">

@@ -34,7 +34,7 @@ class SeatsController < ApplicationController
         @seat.destroy
         flash[:notice] = "Seat configuration was successfully deleted."
     end
-    redirect_to registrations_url
+    redirect_to seats_url
     
   end
 
