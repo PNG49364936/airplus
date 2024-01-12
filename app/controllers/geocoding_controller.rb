@@ -1,11 +1,15 @@
 class GeocodingController < ApplicationController
     require 'httparty'
     def show
-        def show
+        
+          pp "show1" * 100
           @coordinates = session[:coordinates]
-          @place_name = session[:place_name]
-     
-          end
+          pp "show2" * 100
+          Rails.logger.debug "@coordinates in show action2: #{@coordinates.inspect}"
+          @place_name = params[:place_name]
+          #session.delete(:coordinates)
+          #session.delete(:place_name) # Nettoyer la session
+         
     end
 
   def geocode
@@ -16,8 +20,10 @@ class GeocodingController < ApplicationController
       search_query = "#{params[:place_name]}, #{params[:country_name]}"
       pp "3" * 100
       session[:coordinates] = geocode_place(search_query, "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg")
+      session[:place_name] = params[:place_name] 
+      Rails.logger.debug "@coordinates in show action1: #{@coordinates.inspect}"
       pp "4" * 100
-      redirect_to action: :show,place_name: params[:place_name]
+      redirect_to action: :show
       else
         render :geocode
   
@@ -43,7 +49,7 @@ class GeocodingController < ApplicationController
       
       if first_feature
         center_coordinates = first_feature["center"]
-        Rails.logger.debug "Center Coordinates: #{center_coordinates}"
+        Rails.logger.debug "Center-Coordinates1: #{center_coordinates}"
         return center_coordinates
       else
         Rails.logger.debug "No features found in response"
