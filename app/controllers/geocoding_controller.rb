@@ -7,8 +7,9 @@ class GeocodingController < ApplicationController
           pp "show2" * 100
           Rails.logger.debug "@coordinates in show action2: #{@coordinates.inspect}"
           @place_name = params[:place_name]
-          #session.delete(:coordinates)
-          #session.delete(:place_name) # Nettoyer la session
+          Rails.logger.debug "@place_name =: #{@place_name.inspect}"
+           session.delete(:coordinates)
+          session.delete(:place_name) # Nettoyer la session
          
     end
 
@@ -23,7 +24,9 @@ class GeocodingController < ApplicationController
       session[:place_name] = params[:place_name] 
       Rails.logger.debug "@coordinates in show action1: #{@coordinates.inspect}"
       pp "4" * 100
-      redirect_to action: :show
+      redirect_to action: :show, place_name: params[:place_name]
+      pp "5" * 100
+      
       else
         render :geocode
   

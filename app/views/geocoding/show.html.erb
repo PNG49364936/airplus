@@ -1,8 +1,43 @@
+<div class="container">
+  <div class="mt-5">
+    <% if @coordinates %>
+      <p> Latitude: <%= @coordinates[1] %>, Longitude: <%= @coordinates[0] %> de <%= @place_name %></p>
+    <% else %>
+      <p>Aucune coordonnée trouvée pour le lieu spécifié.</p>
+    <% end %>
+  </div>
 
-<% if @coordinates %>
-  <p> Latitude: <%= @coordinates[1] %>, Longitude: <%= @coordinates[0] %> de <%= @place_name %></p>
-<% else %>
-  <p>Aucune coordonnée trouvée pour le lieu spécifié.</p>
-<% end %>
+        <div class="row my-4">
+                            <div class="col">
+                                <div id='map' style='width: 600px; height: 500px; margin: auto;'></div>
+                            </div>
+        </div>  
 
 
+
+
+    <script>
+      mapboxgl.accessToken = "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg";
+      const coordinates = <% if @coordinates %>[<%= @coordinates[0] %>, <%= @coordinates[1] %>]<% else %>[2.549324, 49.008468]<% end %>;
+      // Définir les coordonnées une seule fois
+      //const coordinates = [2.549324, 49.008468];
+  
+      // Créer la carte
+      const map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v12',
+          center: coordinates,
+          zoom: 8
+      });
+  
+      // Ajouter un marqueur
+      new mapboxgl.Marker({
+          scale: 0.6,
+          color: '#fc0339'
+      })
+      .setLngLat(coordinates)
+      .addTo(map);
+  </script>
+
+  
+</div>
