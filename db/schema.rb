@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_10_175624) do
+ActiveRecord::Schema.define(version: 2024_01_13_100235) do
 
   create_table "aircrafts", force: :cascade do |t|
     t.string "acft"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(version: 2024_01_10_175624) do
     t.index ["haul_id"], name: "index_flights_on_haul_id"
     t.index ["registration_id"], name: "index_flights_on_registration_id"
     t.index ["seat_id"], name: "index_flights_on_seat_id"
+  end
+
+  create_table "geocodings", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "hauls", force: :cascade do |t|

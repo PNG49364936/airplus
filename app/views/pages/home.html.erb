@@ -32,16 +32,28 @@
                         container: 'map',
                         style: 'mapbox://styles/mapbox/streets-v12',
                         center: coordinates,
-                        zoom: 8
+                        zoom: 2
                     });
-                
+                    //-DEBUT V1
                     // Ajouter un marqueur
-                    new mapboxgl.Marker({
+                    //new mapboxgl.Marker({
+                       // scale: 0.6,
+                        //color: '#fc0339'
+                    //})
+                    //.setLngLat(coordinates)
+                    //.addTo(map);
+                    // -fin V1
+                    // Itérer sur chaque station et ajouter un marqueur
+                <% @stations_coordinates.each do |coordinates| %>
+                <% if coordinates %>
+                        new mapboxgl.Marker({
                         scale: 0.6,
                         color: '#fc0339'
-                    })
-                    .setLngLat(coordinates)
-                    .addTo(map);
+                        })
+                        .setLngLat([<%= coordinates[0] %>, <%= coordinates[1] %>])
+                        .addTo(map);
+                  <% end %>
+                <% end %>
                 </script>
            
         </div> 
