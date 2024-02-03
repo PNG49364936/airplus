@@ -1,9 +1,36 @@
-<div class="container col-12 mt-10">
+<div class="container col-12 mt-50">
 
+    <h1>Flights</h1>
+      <div class="search">  
+          <%= search_form_for @q do |form| %>
+               <div class="row">
+                    <div class="form-group search-field col">
+                      <%= form.label :airline_code_code_cont, "Code compagnie?" %>
+                      <%= form.search_field :airline_code_code_cont, class: "form-control custom-width", style: "width: 95px;" %>
+                    </div>
+                    <div class="form-group search-field col">
+                      <%= form.label :aircraft_acft_cont, "Aircraft type?" %>
+                      <%= form.search_field :aircraft_acft_eq, class: "form-control custom-width", style: "width: 95px;" %>
+                    </div>
+                      <div class="form-group search-field col">
+                        <%= form.label :departure_station_name_cont, "Departure station?" %>
+                        <%= form.search_field :departure_station_name_eq, class: "form-control custom-width", style: "width: 95px;" %>
+                      </div>
+                      <div class="form-group search-field col">
+                        <%= form.label :arrival_station_name_eq, "Arrival station?" %>
+                        <%= form.search_field :arrival_station_name_eq, class: "form-control custom-width", style: "width: 95px;" %>
+                      </div>  
+                 </div>
+               <br><br>
+                    <div class="form-group">
+                      <%= form.submit class: "btn btn-primary btn-sm" %>
+                    </div>
+            <% end %>
+       </div>
     
 
-    <div class="row col-8">
-         <table class="table ">
+      <div class="index row col-12" style="margin-top: 50px;">
+         <table class="table table-bordered" style= "width:1500PX; border: 4px solid black;">
            
              <thead>
                  <tr>
@@ -14,12 +41,14 @@
                     <th class="text-center">Network</th>
                     <th class="text-center">Cabin</th>
                     <th class="text-center">Seats</th>
-                    <th class="text-center">Departure station</th>
-                    <th class="text-center">Arrival station</th>
+                    <th class="text-center">Dpt station</th>
+                    <th class="text-center">Arrvl station</th>
+                     <th class="text-center">Dpt date</th>
+                     <th class="text-center">Arrvl date</th>
                  </tr>
              </thead>
  
-                 <tbody>
+                 <tbody class="search">
                      <%  @flights.each do |flight| %>
                         <tr>
                             <td class="text-center"><%= flight.airline_code.code %></td>
@@ -31,8 +60,10 @@
                             <td class="text-center"><%= flight.seat.number %></td>
                             <td class="text-center"><%= flight.departure_station.name %></td>
                             <td class="text-center"><%= flight.arrival_station.name %></td>
+                            <td class="text-center"><%= l(flight.departure_date, format: :default) %></td>
+                            <td class="text-center arrival-date"><%= l(flight.arrival_date, format: :default) %></td>
                          <td>
-                             <%=link_to"Annuler aircraft", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
+                             <%=link_to"Annuler", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
                              
                          </td>
                        </tr>
@@ -41,6 +72,14 @@
                  </tbody>
  
          </table>
- 
-         <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
- 
+        </div>
+
+         <br>
+
+        <div class="link">
+          <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
+          <span><%=link_to"Flight list", flights_path, class: "btn btn-danger btn-margin"%></span>
+        </div>
+   
+
+</div>

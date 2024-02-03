@@ -161,7 +161,7 @@
                     
                   <br>
                   
-                  <!--
+                                                                                                                                                            <!--
                   <div class="arrival_station form-group">
                       <%= f.label :station_id, content_tag(:strong, "Arrival station:") %>
                         <% if @arrival_stations.present? %>
@@ -197,7 +197,16 @@
 
              </div>
                              
-                    <br>
+                  <br>
+                  <div class="col-2.5" data-controller = "dates-flights">
+                    <%= f.label :date_range, content_tag(:strong, 'Dates de vol :') %>
+                    <%= f.text_field :date_range, data: { 'dates-flights-target': 'range' }, class: "rounded-box" %>
+                    <%= f.hidden_field :departure_date, data: { dates_flights_target: "startDate" } %>
+                    <%= f.hidden_field :arrival_date, data: { dates_flights_target: "endDate" } %>
+                 
+                 
+                  </div>
+                  <br>
                   
                   
 

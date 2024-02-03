@@ -1,4 +1,5 @@
 class Flight < ApplicationRecord
+    attr_accessor :date_range
     
     belongs_to :registration
     belongs_to :aircraft
@@ -12,6 +13,8 @@ class Flight < ApplicationRecord
     validate :unique_flight_number_for_airline
     validate :validate_flight_number_length
     validate :validate_flight_number_odd_even
+    validates :departure_date, :arrival_date, presence: true
+    validate :arrival_after_departure
     #belongs_to :departure_station, class_name: 'Station', optional: true
     #belongs_to :arrival_station, class_name: 'Station', optional: true
     belongs_to :departure_station, class_name: 'Station', foreign_key: 'departure_station_id', optional: true
@@ -71,6 +74,14 @@ class Flight < ApplicationRecord
                     errors.add(:flight_number,"must be odd")
             end
        end
+
+       def arrival_after_departure
+        return if departure_date.blank? || arrival_date.blank?
+    
+        if arrival_date < departure_date
+          errors.add(:arrival_date, "must be after the departure date")
+        end
+      end
 
    
        

@@ -1,0 +1,13 @@
+fr:
+  time:
+    formats:
+      default: "%d/%m/%Y"
+
+fr:
+  activerecord:
+    errors:
+      models:
+        patient:
+          attributes:
+            nom:
+              blank: "doit être renseigné"

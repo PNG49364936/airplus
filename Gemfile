@@ -5,6 +5,7 @@ ruby '3.0.2'
 #ajouts
 gem "simple_form"
 gem "httparty"
+gem "ransack"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4'

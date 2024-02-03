@@ -1,8 +1,11 @@
-@import"bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 @import "pages/home";
 @import "pages/operations";
 @import "hauls/new";
 @import "flights/new";
+@import "flights/index";
+@import "flatpickr/dist/flatpickr.min.css";
+
 
 .notice{
     color: red
@@ -11,3 +14,5 @@
 .alert{
     color: red
 }
+
+

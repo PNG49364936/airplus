@@ -6,7 +6,9 @@ class FlightsController < ApplicationController
   def index
     @flights = Flight.all
     @aircrafts = Aircraft.all
- 
+    @q = Flight.ransack(params[:q])
+    @flights = @q.result.includes(:airline_code)
+   
   end
 
   def show
@@ -27,7 +29,7 @@ class FlightsController < ApplicationController
     @departure_stations = Station.all
     @arrival_stations = Station.all
     @stations = Station.all
-    @airline_codes = AirlineCode.all
+    @airline_codes = AirlineCode.all    
    
    
 
@@ -102,7 +104,7 @@ class FlightsController < ApplicationController
   end
 
   def params_flight
-    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id, :airport_name)
+    params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id, :airport_name, :departure_date, :arrival_date, :date_range)
   end
 
 

@@ -1,12 +1,7 @@
 .custom-background{
     background-color: deepskyblue;
 }
-.B777{
-    position: fixed; /* L'image restera fixe */
-  top: 50%; /* Position verticale au milieu de la page */
-  left: 20%; /* Position horizontale au milieu de la page */
-  transform: translate(-50%, -50%); /* Centrer l'image */
-}
+
 
 .home-tittle{
     position: fixed;
@@ -14,15 +9,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: blue;
-    font-size: 100px;
+    font-size: 80px;
 }
 
 .airplus{
     font-size: 130px;
-    margin-top: -30px;
+    margin-top: -50px;
 }
 
-.map{
-   top: 50%;
+.larger-image {
+    transform: scale(1.2);
 }
+
+
 

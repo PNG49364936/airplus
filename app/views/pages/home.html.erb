@@ -1,25 +1,25 @@
 <body class="custom-background">
         <div class="container text-center">
               <div class="row my4 " >
-                <div class="col">
-                    <p class="airplus">AIR PLUS</p>
-                </div>
-               </div>  
-            
-
-               <div class="row my-4">
                         <div class="col">
-                            <div id='map' style='width: 600px; height: 500px; margin: auto;'></div>
+                            <p class="airplus">AIR PLUS</p>
                         </div>
                </div>  
-               
-               <div class="row my-4">
-                                <div class="col">
-                                <%= link_to image_tag("B777.jpeg", class: "img-fluid"), pages_operations_path %>
-                                </div>
-                </div>
             
+            <div class="row my-4 align-items-center justify-content-center">
 
+                <div class="col-md-5">      
+                            <%= link_to image_tag("B777.jpeg", class: "img-fluid larger-image"), pages_operations_path %>
+                </div>
+
+                 <div class="col-md-5">
+                            <div id='map' style='width: 600px; height: 500px; margin: auto;'></div>
+                           </div>
+                 </div>  
+               
+               
+            
+            </div>
             
                 <script>
                     mapboxgl.accessToken = "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg";

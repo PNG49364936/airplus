@@ -5,10 +5,11 @@ class PagesController < ApplicationController
   def home
     @stations = Station.all
       @stations_coordinates = @stations.map do |station|
-        Rails.logger.debug "Stations Coordinates: #{@stations_coordinates.inspect}"
         geocode_place("#{station.place_name}, #{station.country_name}", "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg")
      end
-    end
+     Rails.logger.debug "All Stations Coordinates1: #{@stations_coordinates.inspect}"
+
+  end
 
 
     private
