@@ -26,6 +26,7 @@
                     
                     // Définir les coordonnées une seule fois
                     const coordinates = [2.549324, 49.008468];
+                    //longitude puis latitude.
                 
                     // Créer la carte
                     const map = new mapboxgl.Map({
@@ -45,7 +46,7 @@
                     // -fin V1
                     // Itérer sur chaque station et ajouter un marqueur
                 <% @stations_coordinates.each do |coordinates| %>
-                <% if coordinates %>
+                   <% if coordinates %>
                         new mapboxgl.Marker({
                         scale: 0.6,
                         color: '#fc0339'

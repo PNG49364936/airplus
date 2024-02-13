@@ -41,6 +41,8 @@ class StationsController < ApplicationController
           end
     end
 
+    
+
         private
 
         def set_station

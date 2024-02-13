@@ -23,7 +23,7 @@ class RegistrationsController < ApplicationController
         if @registration.save
             redirect_to @registration, notice: 'Registration was successfully created.'
           else
-            render :new
+            render :new 
         end
   end
 
@@ -35,7 +35,7 @@ class RegistrationsController < ApplicationController
 
   def destroy
     pp "A"*100
-        if @registration.flights.any?
+        if @registration.flights.any? 
           pp "B"*100
           flash[:alert] = "This registration is used by flights and cannot be deleted."
           else

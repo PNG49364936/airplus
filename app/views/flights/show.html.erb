@@ -9,7 +9,8 @@
             <p><strong>Seats number:</strong> <%= @flight.seat.number%></p>
             <p><strong>Departure station:</strong> <%= @flight.departure_station.name%></p>
             <p><strong>Arrival station:</strong> <%= @flight.arrival_station.name%></p>
-
+            <p><strong>Departure day:</strong> <%= @flight.departure_date%></p>
+            <p><strong>Arrival day:</strong> <%= @flight.arrival_date%></p>
             <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
     </div>
 </div>

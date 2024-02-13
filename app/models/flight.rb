@@ -1,5 +1,6 @@
 class Flight < ApplicationRecord
     attr_accessor :date_range
+    attr_accessor :is_return_flight
     
     belongs_to :registration
     belongs_to :aircraft
@@ -10,7 +11,7 @@ class Flight < ApplicationRecord
     validate :unique_station
     validate :check_haul
     validates :registration, :aircraft, :haul, :cabin, :seat, :departure_station, :arrival_station, :airline_code, :flight_number, presence: true
-    validate :unique_flight_number_for_airline
+    validate :unique_flight_number_for_airline, unless: -> { is_return_flight }
     validate :validate_flight_number_length
     validate :validate_flight_number_odd_even
     validates :departure_date, :arrival_date, presence: true
@@ -20,6 +21,16 @@ class Flight < ApplicationRecord
     belongs_to :departure_station, class_name: 'Station', foreign_key: 'departure_station_id', optional: true
     belongs_to :arrival_station, class_name: 'Station', foreign_key: 'arrival_station_id', optional: true
     
+    belongs_to :departure_station, class_name: 'Station', foreign_key: 'departure_station_id'
+    belongs_to :arrival_station, class_name: 'Station', foreign_key: 'arrival_station_id'
+  
+    before_validation :set_station_details
+
+   
+    
+    def has_return_flight?
+      Flight.where(flight_number: self.flight_number + 1, departure_station_id: self.arrival_station_id, arrival_station_id: self.departure_station_id).exists?
+    end
     private
     def unique_station
         if  arrival_station_id == departure_station_id
@@ -83,8 +94,57 @@ class Flight < ApplicationRecord
         end
       end
 
-   
-       
+      def self.create_return_flight(flight)
+        new_flight = flight.dup # Duplique l'objet flight pour créer un nouveau vol avec des attributs identiques
+    
+        # Inverser les stations de départ et d'arrivée
+        new_flight.departure_station_id = flight.arrival_station_id
+        new_flight.arrival_station_id = flight.departure_station_id
+    
+        # Ajuster la date de départ et d'arrivée pour le vol retour
+        # Cette logique dépend de la façon dont vous souhaitez calculer ces dates
+        #new_flight.departure_date = flight.arrival_date + 1.day
+        #new_flight.arrival_date = new_flight.departure_date + (flight.arrival_date - flight.departure_date)
+    
+        # Ajuster le numéro de vol si nécessaire
+        # Cette logique dépend de vos règles métier pour la numérotation des vols retour
+        new_flight.flight_number = adjust_flight_number(flight.flight_number)
+    
+        new_flight.save # Sauvegarde le nouveau vol dans la base de données
+        new_flight # Retourne le nouvel objet vol
+      end
+    
+      # Exemple de méthode pour ajuster le numéro de vol
+      # Vous devrez implémenter cette logique en fonction de vos besoins
+      def self.adjust_flight_number(flight_number)
+        # Exemple : si le numéro de vol est pair, ajoute +1 pour le rendre impair (ou vice versa)
+        flight_number.even? ? flight_number + 1 : flight_number - 1
+      end
 
+      def set_station_details
+        if departure_station_id && arrival_station_id
+          departure_station = Station.find(departure_station_id)
+          arrival_station = Station.find(arrival_station_id)
+    
+          self.departure_place_name = departure_station.place_name
+          self.departure_country_name = departure_station.country_name
+          self.arrival_place_name = arrival_station.place_name
+          self.arrival_country_name = arrival_station.country_name
+        end
+      end
+
+
+      #NEW POINTERS
+      def set_coordinates
+        return if latitude.present? && longitude.present?
+    
+        coordinates = geocode_place("#{place_name}, #{country_name}")
+        if coordinates
+          self.latitude = coordinates[1]
+          self.longitude = coordinates[0]
+        end
+      end
+       
+     
          
 end

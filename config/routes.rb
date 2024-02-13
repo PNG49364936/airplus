@@ -28,10 +28,13 @@ Rails.application.routes.draw do
   resources :flights
   resources :hauls
   resources :stations
-
-  
   resources :airline_codes
 
+  resources :flights do
+    member do
+      post 'create_return'
+    end
+  end
 
   
   
