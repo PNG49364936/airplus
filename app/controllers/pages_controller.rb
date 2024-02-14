@@ -1,15 +1,16 @@
 class PagesController < ApplicationController
   
 
-  def home
+    def home
     
  
       @stations = Station.all
   
-      # Utiliser les coordonnées stockées dans chaque station pour créer le tableau des coordonnées
+     
+    
       @stations_coordinates = @stations.map do |station|
         [station.longitude, station.latitude] if station.longitude && station.latitude
-      end.compact # Utilisez .compact pour éliminer les éléments nil du tableau
+      end.compact 
     end
 
 end

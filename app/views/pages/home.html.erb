@@ -46,15 +46,42 @@
                     // -fin V1
                     // Itérer sur chaque station et ajouter un marqueur
                 <% @stations_coordinates.each do |coordinates| %>
-                   <% if coordinates %>
-                        new mapboxgl.Marker({
-                        scale: 0.6,
-                        color: '#fc0339'
-                        })
-                        .setLngLat([<%= coordinates[0] %>, <%= coordinates[1] %>])
-                        .addTo(map);
-                  <% end %>
-                <% end %>
+    <% if coordinates %>
+      new mapboxgl.Marker({
+        scale: 0.6,
+        color: '#fc0339'
+      })
+      .setLngLat([<%= coordinates[0] %>, <%= coordinates[1] %>])
+      .addTo(map);
+    <% end %>
+  <% end %>
+
+  // Tracer les lignes entre les stations de départ et d'arrivée pour chaque vol
+  <% @flight_paths.each do |path| %>
+    map.addLayer({
+      id: 'route<%= path[:id] %>', // Assurez-vous que chaque id de couche est unique
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: <%= path[:coordinates].to_json %>
+          }
+        }
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#007cbf', // Couleur de la ligne
+        'line-width': 3
+      }
+    });
+  <% end %>
                 </script>
            
         </div> 
