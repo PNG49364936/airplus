@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'pages/bigmap', to: 'pages#bigmap'
+  get 'pages/home', to: 'pages#home'
+  get 'pages/operations', to: 'pages#operations'
+  get 'pages/about', to: 'pages#about'
   get 'flights/stations', to: 'flights#stations'
-
   get 'geocoding/show', to: 'geocoding#show'
   get 'geocoding/geocode', to: 'geocoding#geocode'
   get 'flights/index'

@@ -1,44 +1,55 @@
 class PagesController < ApplicationController
   
-
-    def home
-    
- 
-      @stations = Station.all
+  before_action :set_map_data, only: [:home, :bigmap]
   
+  
+  
+  
+  def bigmap
+  end 
+
+  def home
+  end
+
+
+  private
+
+
+  def set_map_data
+    @stations = Station.all
+    @flights = Flight.includes(:departure_station, :arrival_station)
+  
+    # Préparer les données des stations pour les markers sur la carte
+    @stations_coordinates = @stations.map do |station|
+      [station.longitude, station.latitude] if station.longitude && station.latitude
+    end.compact
+  
+    # Préparer les données des chemins de vol pour tracer des lignes sur la carte
+    @flight_paths = @flights.map do |flight|
      
-    
-      @stations_coordinates = @stations.map do |station|
-        [station.longitude, station.latitude] if station.longitude && station.latitude
-      end.compact 
-    end
+      if flight.departure_station && flight.arrival_station
+        pp flight.departure_station
+        pp flight.arrival_station
+        
+      
+        {
+          id: flight.id, # Ajouter l'ID du vol pour créer un identifiant unique de la couche
+          coordinates: [
+            [flight.departure_station.longitude, flight.departure_station.latitude],
+            [flight.arrival_station.longitude, flight.arrival_station.latitude]
+          ]
+          
+        }
+      end
+    end.compact
+  end
+
+
+
 
 end
 
 
 
- # def update_station_coordinates
-  #  Station.find_each do |station|
-     # coordinates = geocode_place("#{station.place_name}, #{station.country_name}", "votre_access_token_mapbox")
-     # if coordinates
-     #   station.update(latitude: coordinates[1], longitude: coordinates[0])
-     # end
-    #end
- # end
-
 
  
-
-   # def geocode_place(place_name, access_token)
-   #   base_url = "https://api.mapbox.com/geocoding/v5/mapbox.places"
-   #   search_url = "#{base_url}/#{CGI.escape(place_name)}.json"
-   #   response = HTTParty.get(search_url, query: { access_token: access_token })
-  
-    #  if response.success?
-    #   data = JSON.parse(response.body)
-      #  first_feature = data["features"].first if data["features"] && data["features"].any?
-      #  first_feature ? first_feature["center"] : nil
-     # else
-     #   nil
-     #end
-    #end
