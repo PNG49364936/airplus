@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'registrations/update'
   get 'registrations/destroy'
   get 'pages/operations'
+  get 'flights/available_registrations', to: 'flights#available_registrations'
   root to: 'pages#home'
  
 
@@ -38,6 +39,8 @@ Rails.application.routes.draw do
       post 'create_return'
     end
   end
+
+  
 
   
   

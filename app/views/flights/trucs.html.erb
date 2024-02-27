@@ -1,0 +1,12 @@
+<div class="registration form-group">
+                    <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
+                    <% if @available_registrations.nil? %>
+                   
+                    <%= "La variable @available_registrations est nil." %>
+                    <% elsif @available_registrations.empty? %>
+                      <%= "La variable @available_registrations est vide." %>
+                    <% else %>
+                      <%= "La variable @available_registrations contient des données." %>
+                    <% end %> 
+                    </div>
+                    

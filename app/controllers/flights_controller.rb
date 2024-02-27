@@ -2,99 +2,42 @@ class FlightsController < ApplicationController
   require "registration"
  
   before_action :set_flight, only: [:show, :edit, :update, :destroy, :create_return]
- 
+  before_action :set_select_collections, only: [:new, :create, :edit, :update]
+
   def index
     @flights = Flight.all
     @aircrafts = Aircraft.all
     @q = Flight.ransack(params[:q])
     @flights = @q.result.includes(:airline_code)
-   
   end
 
   def show
   end
 
   def new
-    @flight =Flight.new
-    @registration =  Registration.all
-    @registration = Registration.first
-    @aircraft = Aircraft.all
-    @aircraft = Aircraft.first
-    @haul = Haul.all
-   
-    @cabin = Cabin.all
-    @cabin = Cabin.first
-    @seat = Seat.all
-    @seat = Seat.first
-    @departure_stations = Station.all
-    @arrival_stations = Station.all
-    @stations = Station.all
-    @airline_codes = AirlineCode.all    
-   
-   
-
-
-   
-    @used_registrations = Flight.pluck(:registration_id)
-    @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
-    @available_registrations = Registration.where.not(reg: @used_registration_numbers)
-
-   
-
+    @flight = Flight.new
     
+     
   end
 
   def create
-    puts "Parameters: #{params.inspect}"
-    @flight = Flight.new(params_flight)
-       if @flight.save
-    redirect_to @flight, notice: 'Flight created.'
-  else
-    #definir @used_registrations
-    @used_registrations = Flight.pluck(:registration_id)
-    @used_registration_numbers = Registration.where(id: @used_registrations).pluck(:reg)
-    @available_registrations = Registration.where.not(reg: @used_registration_numbers)
-    puts "@available_registrations********: #{@available_registrations.inspect}"
-    @registration =  Registration.all
-    #@others
-    @aircraft = Aircraft.all
-    @haul = Haul.all
-    @cabin = Cabin.all
-    @seat = Seat.all
-    @departure_stations = Station.all
-    @arrival_stations = Station.all
-    @airline_codes = AirlineCode.all
-
-    def create_return
-      original_flight = Flight.find(params[:id])
-      # Logique pour créer le vol retour (voir l'exemple de méthode dans le modèle Flight)
-      new_flight_number = flight.flight_number.to_i.even? ? flight.flight_number.to_i + 1 : flight.flight_number.to_i + 1
-      Flight.create(
-        airline_code_id: flight.airline_code_id,
-        flight_number: new_flight_number.to_s,
-        registration_id: flight.registration_id,
-        aircraft_id: flight.aircraft_id,
-        cabin_id: flight.cabin_id,
-        seat_id: flight.seat_id,
-        departure_station_id: flight.arrival_station_id,
-        arrival_station_id: flight.departure_station_id,
-        departure_date: flight.arrival_date + 1.day, # Exemple d'ajustement de la date
-        arrival_date: flight.departure_date + 1.day + 2.hours # Exemple d'ajustement de la date
-        # Ajoutez d'autres champs nécessaires ici
-      )
-      new_flight = Flight.create_return_flight(original_flight)
-      
-      if new_flight.save
-        redirect_to flights_path, notice: 'Vol retour créé avec succès.'
-      else
-        redirect_to flights_path, alert: 'Erreur lors de la création du vol retour.'
-      end
+    @flight = Flight.new(flight_params)
+    if @flight.save
+      redirect_to @flight, notice: 'Flight created.'
+    else
+      render :new
     end
-    
-   
-
-    render :new
   end
+
+  def create_return
+    original_flight = Flight.find(params[:id])
+    # Logique pour créer le vol retour (à ajuster selon votre implémentation)
+    new_flight = Flight.create_return_flight(original_flight) # Supposons que cette méthode gère correctement la création
+    if new_flight.save
+      redirect_to flights_path, notice: 'Vol retour créé avec succès.'
+    else
+      redirect_to flights_path, alert: 'Erreur lors de la création du vol retour.'
+    end
   end
 
   def edit
@@ -110,31 +53,37 @@ class FlightsController < ApplicationController
 
   def stations
     flight_haul_id = params[:flight_haul]
-  haul = Haul.find_by(id: flight_haul_id)
+    haul = Haul.find_by(id: flight_haul_id)
 
-  if haul
-    @stations = Station.where(haul: haul.name)
-  else
-    @stations = Station.none
-  end
-
-  render json: { stations: @stations.select(:id, :name).map(&:attributes) }
-  end
-
-  def create_return
-    original_flight = Flight.find(params[:id])
-    new_flight = Flight.create_return_flight(original_flight)
-    new_flight.is_return_flight = true
-    if new_flight.save
-      pp "1" * 100
-      redirect_to flights_path, notice: 'Vol retour créé avec succès.'
+    if haul
+      @stations = Station.where(haul: haul.name)
     else
-      pp "2" * 100
-      redirect_to flights_path, alert: 'Erreur lors de la création du vol retour.'
+      @stations = Station.none
     end
+
+    render json: { stations: @stations.select(:id, :name).map(&:attributes) }
   end
 
-  
+  def available_registrations
+    pp "1" * 100
+    departure_date = params[:departure_date]
+    puts departure_date
+    used_registrations = Flight.where(departure_date: departure_date).pluck(:registration_id)
+    pp "2" * 100
+   #puts used_registrations
+    available_registrations = Registration.where.not(id: used_registrations)
+    
+    #puts available_registrations
+    # Renvoyer les registrations disponibles au format JSON
+        available_registrations.each do |registration|
+          puts "ID: #{registration.id}, Reg: #{registration.reg}"
+        end
+    @available_registrations = available_registrations
+    puts @available_registrations
+    logger.debug "@available_registrations: #{@available_registrations.inspect}"
+    #render json: available_registrations
+    render json: @available_registrations.map{|r| {id: r.id, reg: r.reg}}
+  end
 
   private
 
@@ -142,10 +91,29 @@ class FlightsController < ApplicationController
     @flight = Flight.find(params[:id])
   end
 
-  def params_flight
+  def flight_params
     params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id, :airport_name, :departure_date, :arrival_date, :date_range)
   end
 
+  def set_select_collections
+    @registrations = Registration.all
+    @aircraft = Aircraft.all
+    @haul = Haul.all
+    @cabin = Cabin.all
+    @seat = Seat.all
+    @departure_stations = Station.all
+    @arrival_stations = Station.all
+    @stations = Station.all
+    @airline_codes = AirlineCode.all
+
+    #used_registrations = Flight.pluck(:registration_id)
+    #used_registration_numbers = Registration.where(id: used_registrations).pluck(:reg)
+    #@available_registrations = Registration.where.not(reg: used_registration_numbers)
+  end
+
+  # dans app/controllers/flights_controller.rb
+
+# Nouvelle action pour obtenir les registrations disponibles
 
 
 end

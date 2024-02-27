@@ -28,16 +28,6 @@
                               <% end %>
                       </div>
               <% end %>
-
-              <div class="col-2.5" data-controller = "dates-flights">
-                    <%= f.label :date_range, content_tag(:strong, 'Dates de vol :') %>
-                    <%= f.text_field :date_range, data: { 'dates-flights-target': 'range' }, class: "rounded-box" %>
-                    <%= f.hidden_field :departure_date, data: { dates_flights_target: "startDate" } %>
-                    <%= f.hidden_field :arrival_date, data: { dates_flights_target: "endDate" } %>
-              </div>
-
-              <br>
-
               <div class="airline_code form-group ">
                 <%= f.label :airline_code, content_tag(:strong, 'Airline code:') %>
                 <% if @airline_codes.present? %>
@@ -89,12 +79,10 @@
                         <% end %>
                   </div>
                   <br>
-                  <div class="registration form-group" data-controller="dates-flights ">
-                    <div data-controller="dates-flights">
+                  <div class="registration form-group">
                     <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
                     <% if @available_registrations.present? %>
-                    <%= f.collection_select :registration_id, @available_registrations, :id, :reg, {include_blank: "Choisir"}, {id: "flight_registration_id", class: "form-control", data: { "dates-flights-target": "registration" }} %>
-
+                        <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" ,  class: "form-control" } %> 
                       <% else %>   
                         <div class="alert alert-danger" >
                             No Registration available, create it.
@@ -118,7 +106,7 @@
                           <%= link_to "Créér des immatriculations", new_aircraft_path, class: "creer text-white" %>
                         </div>
                         <% end %>  
-                      </div>
+                  
                       </div>
                   <br>
                  
@@ -210,7 +198,14 @@
              </div>
                              
                   <br>
-                  
+                  <div class="col-2.5" data-controller = "dates-flights">
+                    <%= f.label :date_range, content_tag(:strong, 'Dates de vol :') %>
+                    <%= f.text_field :date_range, data: { 'dates-flights-target': 'range' }, class: "rounded-box" %>
+                    <%= f.hidden_field :departure_date, data: { dates_flights_target: "startDate" } %>
+                    <%= f.hidden_field :arrival_date, data: { dates_flights_target: "endDate" } %>
+                 
+                 
+                  </div>
                   <br>
                   
                   
