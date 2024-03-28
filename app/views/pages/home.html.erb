@@ -1,29 +1,28 @@
 <body class="custom-background">
-        <div class="container text-center">
-                      <div class="row my4 " >
-                                <div class="col">
-                                    <p class="airplus">AIR PLUS</p>
-                                </div>
-                      </div>  
-            
-                    <div class="row my-4 align-items-center justify-content-center">
-
-                        <div class="col-md-5">      
-                                    <%= link_to image_tag("B777.jpeg", class: "img-fluid larger-image"), pages_operations_path %>
-                        </div>
-
-                        <div class="col-md-5">
-                                    <div id='map' style='width: 600px; height: 500px; margin: auto;'></div>
-                        </div>
-                    </div>  
+    <div class="container text-center">
+        <div class="row my-4">
+            <div class="col">
+                <p class="airplus">AIR PLUS</p>
+            </div>
         </div>
-            <!--<%= pp @flight_paths %>-->
-    <div class="map">      
+
+        <div class="row my-4 align-items-center justify-content-center">
+            <div class="col-md-5">
+                <%= link_to image_tag("B777.jpeg", alt: "B777", class: "img-fluid larger-image"), pages_operations_path %>
+            </div>
+
+            <div class="col-md-5">
+                <div id='map' style='width: 600px; height: 500px; margin: auto;'></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="map">
         <script>
             document.addEventListener("turbolinks:load", function() {
-                mapboxgl.accessToken = "pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg";
-                const coordinates = [2.549324, 49.008468];
-                const map = new mapboxgl.Map({
+                mapboxgl.accessToken = 'pk.eyJ1IjoicG5nYXV0aGllciIsImEiOiJjbHFncjBjMG0xZGNlMm1ubWV2aXU1NnpmIn0.x06uuDfCgcRIZtJNmrF7Bg';
+                var coordinates = [2.549324, 49.008468];
+                var map = new mapboxgl.Map({
                     container: 'map',
                     style: 'mapbox://styles/mapbox/streets-v12',
                     center: coordinates,
@@ -31,25 +30,18 @@
                 });
 
                 map.on('load', function() {
-                    // Itérer sur chaque station et ajouter un marqueur
                     <% @stations_coordinates.each do |coordinates| %>
-                        <% if coordinates %>
-                            new mapboxgl.Marker({
-                                scale: 0.6,
-                                color: '#fc0339'
-                            })
-                            .setLngLat([<%= coordinates[0] %>, <%= coordinates[1] %>])
-                            .addTo(map);
-                        <% end %>
+                        new mapboxgl.Marker({
+                            scale: 0.6,
+                            color: '#fc0339'
+                        })
+                        .setLngLat([<%= coordinates[0] %>, <%= coordinates[1] %>])
+                        .addTo(map);
                     <% end %>
 
-                    // Tracer les lignes entre les stations de départ et d'arrivée pour chaque vol
-                    //console.log("Flight Paths:", <%= @flight_paths.to_json.html_safe %>);
                     <% @flight_paths.each do |path| %>
-                        console.log("Tracing flight path for flight ID:", <%= path[:id] %>);
-                        console.log("Coordinates:", <%= path[:coordinates].to_json %>);
                         map.addLayer({
-                            id: 'route<%= path[:id] %>', // Utiliser l'ID du vol pour créer un ID de couche unique
+                            id: 'route<%= path[:id] %>',
                             type: 'line',
                             source: {
                                 type: 'geojson',
@@ -67,25 +59,20 @@
                                 'line-cap': 'round'
                             },
                             paint: {
-                                    'line-color': '#888',
-                                    'line-width': 4,
-                                    // Ici, nous définissons le motif de pointillé : [longueur du segment, longueur de l'espace]
-                                    'line-dasharray': [1, 2] // 
+                                'line-color': '#888',
+                                'line-width': 4,
+                                'line-dasharray': [1, 2]
                             }
                         });
                     <% end %>
                 });
-                });
-          </script>
-         <br>
-        
-         <div class="bigmap">
-          <span><%=link_to"BIG MAP?",pages_bigmap_path,class: "btn btn-primary" %></span> 
-        </div>
-   
-   
-    </div> 
+            });
+        </script>
+        <br>
 
-           
-        
+        <div class="bigmap">
+            <span><%= link_to "BIG MAP?", pages_bigmap_path, class: "btn btn-primary" %></span>
+        </div>
+    </div>
 </body>
+

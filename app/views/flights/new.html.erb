@@ -16,9 +16,7 @@
           </div>
   
   <div class="row">
-      <div class="col-3 mt-5" >
-
-          
+      <div class="col-3 mt-3" >
           <%= simple_form_for(@flight) do |f| %>
           <div data-controller="flight-form">
               <% if f.object.errors[:base].any? %>
@@ -31,7 +29,7 @@
 
               <div class="col-2.5" data-controller = "dates-flights">
                     <%= f.label :date_range, content_tag(:strong, 'Dates de vol :') %>
-                    <%= f.text_field :date_range, data: { 'dates-flights-target': 'range' }, class: "rounded-box" %>
+                   <%= f.text_field :date_range, data: { 'dates-flights-target': 'range' }, class: "rounded-box" %>
                     <%= f.hidden_field :departure_date, data: { dates_flights_target: "startDate" } %>
                     <%= f.hidden_field :arrival_date, data: { dates_flights_target: "endDate" } %>
               </div>
@@ -55,7 +53,6 @@
               <br>
               <div class="flight_number form-group ">
                 <%=  f.label :flight_number,content_tag(:strong, 'Flight number:') %>
-                
                 <%=  f.text_field :flight_number, class:"custom-width"%>
               </div>
               
@@ -78,7 +75,6 @@
                       <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
                         <% if @haul.present? %>
                         <%= f.collection_select :haul_id, Haul.all, :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { action: "change->flight-form#updateStations", flight_form_target: "flightHaul" },class:"custom-width-a" } %>
-
                            <% else %> 
                                   <div class="alert alert-danger" >
                                       No Haul code available, create it.
@@ -89,21 +85,24 @@
                         <% end %>
                   </div>
                   <br>
-                  <div class="registration form-group" data-controller="dates-flights ">
-                    <div data-controller="dates-flights">
+                  <div class="registration form-group" >
                     <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
+                       <!--<%= debug(@available_registrations) %>-->
                     <% if @available_registrations.present? %>
-                    <%= f.collection_select :registration_id, @available_registrations, :id, :reg, {include_blank: "Choisir"}, {id: "flight_registration_id", class: "form-control", data: { "dates-flights-target": "registration" }} %>
+                    <!--<%= debug(@available_registrations) %>-->
+                   <%= f.collection_select :registration_id, @available_registrations, :id, :reg, { include_blank: "Choisir" }, { class: "form-control custom-width-a", data: { dates_flights_target: "registration" }, id: "registrationSelect" } %>
 
-                      <% else %>   
-                        <div class="alert alert-danger" >
-                            No Registration available, create it.
-                        </div>  
-                        <div class="creation btn btn-primary " >
-                            <%= link_to "Créér des immatriculations", new_registration_path, class: "creer text-white" %>
-                        </div>
-                     <% end %> 
-                    </div>
+                   <% else %>
+                      <div class="alert alert-danger">
+                        <%= t('registrations.none_available') %> <!-- Utilisation de l'internationalisation ici -->
+                      </div>  
+                      <div class="creation btn btn-primary">
+                        <%= link_to t('registrations.create_new'), new_registration_path, class: "creer text-white" %> <!-- Utilisation de l'internationalisation ici -->
+                      </div>
+                   <%= debug(@available_registrations) %>
+                <% end %> 
+                  </div>
+                  
                     
                   <br>
                   <div class="aircraft form-group">
@@ -118,7 +117,7 @@
                           <%= link_to "Créér des immatriculations", new_aircraft_path, class: "creer text-white" %>
                         </div>
                         <% end %>  
-                      </div>
+                     
                       </div>
                   <br>
                  
@@ -170,7 +169,6 @@
                          <% end %> 
                         
                     </div>
-                    
                   <br>
                   
                                                                                                                                                             <!--
@@ -206,23 +204,18 @@
                         </div>
                       <% end %>
                     </div>
-
              </div>
-                             
                   <br>
-                  
-                  <br>
-                  
-                  
-
                     <div class="submit">
                         <%=f.submit"Valider", class: "btn btn-primary"%>
                         <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span>
                     </div>
+                    
 
 
           <% end %>
       </div>
+      
       
   </div>
 

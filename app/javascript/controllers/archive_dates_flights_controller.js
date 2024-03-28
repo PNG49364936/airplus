@@ -34,17 +34,36 @@ export default class extends Controller {
       console.log("Formatted End Date:", formattedEndDate);
     }
   }
-  formatDate(date) {
-    let month = '' + (date.getMonth() + 1);
-    let day = '' + date.getDate();
-    let year = '' + date.getFullYear();
+  updateRegistrationSelect(data) {
+    console.log("test1")
+    const registrationSelect = this.registrationTarget;
+    console.log("test2")
+    registrationSelect.innerHTML = '';
 
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
-
+    const options = data.map(registration => {
+        // Utilisation explicite du mot-clé return pour la clarté
+        return `<option value="${registration.id}">${registration.reg}</option>`;
+    }).join('');
+    
+    registrationSelect.innerHTML = options;
 }
+
+  formatDate(date) {
+    return date.toISOString().split('T')[0];
+  }
+  connect() {
+    console.log("DatesFlightsController connected");
+    console.log(this.hasRegistrationTarget); // Vérifie si l'élément cible est accessible
+    if (this.hasRegistrationTarget) {
+      console.log("Registration target found:", this.registrationTarget);
+    } else {
+      console.log("Registration target not found.");
+    }
+  }
+}
+
+  
+  
+
+
+

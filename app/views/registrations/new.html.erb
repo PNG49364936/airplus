@@ -5,6 +5,7 @@
      
                     <h4>Registration(s) déjà créés :</h4>
                           <td><%= @registrations.map(&:reg).join(', ') %></td>
+                          <td><%= @registrations.map(&:haul).join(', ') %></td>
            <%else%>
                 <div class="alert alert-danger">
               
@@ -33,7 +34,12 @@
                     <%=  f.label :reg,content_tag(:strong, 'Registration:') %>
                     <%=  f.text_field :reg, class:"rounded-box"%>
                 </div>
+                <br><br><div class="col-2.5">
+                    <%=  f.label :reg,content_tag(:strong, 'Registration haul:') %>
+                    <%=  f.text_field :haul, class:"rounded-box"%>
+                </div>
                 <br><br>
+                
                     <div class="submit">
                         <%=f.submit"Valider", class: "btn btn-primary"%>
                     </div>   

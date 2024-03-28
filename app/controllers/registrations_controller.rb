@@ -57,7 +57,7 @@ class RegistrationsController < ApplicationController
     end
 
     def params_registration 
-    params.require(:registration).permit(:reg)
+    params.require(:registration).permit(:reg, :haul)
     end
 
 end

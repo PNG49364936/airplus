@@ -4,6 +4,7 @@
              <thead>
                  <tr>
                      <td>Registrations</td>
+                     <td>Haul</td>
                  </tr>
              </thead>
  
@@ -11,6 +12,7 @@
                      <%  @registrations.each do |registration| %>
                         <tr>
                             <td><%=registration.reg %></td>
+                            <td><%=registration.haul %></td>
                          
                             <td>
                                 <%=link_to"Annuler Registrations", registration_path(registration),method: :delete, class: "btn btn-danger btn-margin"%>

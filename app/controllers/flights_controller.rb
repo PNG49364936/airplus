@@ -3,12 +3,14 @@ class FlightsController < ApplicationController
  
   before_action :set_flight, only: [:show, :edit, :update, :destroy, :create_return]
   before_action :set_select_collections, only: [:new, :create, :edit, :update]
+  before_action :set_available_registrations
 
   def index
     @flights = Flight.all
     @aircrafts = Aircraft.all
     @q = Flight.ransack(params[:q])
     @flights = @q.result.includes(:airline_code)
+   
   end
 
   def show
@@ -16,8 +18,6 @@ class FlightsController < ApplicationController
 
   def new
     @flight = Flight.new
-    
-     
   end
 
   def create
@@ -31,14 +31,20 @@ class FlightsController < ApplicationController
 
   def create_return
     original_flight = Flight.find(params[:id])
-    # Logique pour créer le vol retour (à ajuster selon votre implémentation)
-    new_flight = Flight.create_return_flight(original_flight) # Supposons que cette méthode gère correctement la création
-    if new_flight.save
+    
+    # Assurez-vous que la méthode create_return_flight définit is_return_flight à true
+    new_flight = Flight.create_return_flight(original_flight)
+  
+    if new_flight.persisted?
+      # Si le vol retour a été persisté avec succès dans la base de données
       redirect_to flights_path, notice: 'Vol retour créé avec succès.'
     else
-      redirect_to flights_path, alert: 'Erreur lors de la création du vol retour.'
+      # Incluez les erreurs spécifiques pour aider au débogage ou à l'information de l'utilisateur
+      flash[:alert] = "Erreur lors de la création du vol retour: #{new_flight.errors.full_messages.join(', ')}"
+      redirect_to flights_path
     end
   end
+  
 
   def edit
   end
@@ -54,13 +60,11 @@ class FlightsController < ApplicationController
   def stations
     flight_haul_id = params[:flight_haul]
     haul = Haul.find_by(id: flight_haul_id)
-
     if haul
       @stations = Station.where(haul: haul.name)
     else
       @stations = Station.none
     end
-
     render json: { stations: @stations.select(:id, :name).map(&:attributes) }
   end
 
@@ -72,7 +76,6 @@ class FlightsController < ApplicationController
     pp "2" * 100
    #puts used_registrations
     available_registrations = Registration.where.not(id: used_registrations)
-    
     #puts available_registrations
     # Renvoyer les registrations disponibles au format JSON
         available_registrations.each do |registration|
@@ -85,6 +88,8 @@ class FlightsController < ApplicationController
     render json: @available_registrations.map{|r| {id: r.id, reg: r.reg}}
   end
 
+ 
+
   private
 
   def set_flight
@@ -93,6 +98,12 @@ class FlightsController < ApplicationController
 
   def flight_params
     params.require(:flight).permit(:registration_id, :aircraft_id, :cabin_id, :haul_id, :seat_id, :departure_station_id, :arrival_station_id, :flight_number, :airline_code_id, :airport_name, :departure_date, :arrival_date, :date_range)
+  end
+
+  def set_available_registrations
+    pp "*"*20
+    @available_registrations = Registration.all # Exemple simple de définition
+    Rails.logger.debug "@available_registrations set with #{@available_registrations.count} items"
   end
 
   def set_select_collections
@@ -110,10 +121,6 @@ class FlightsController < ApplicationController
     #used_registration_numbers = Registration.where(id: used_registrations).pluck(:reg)
     #@available_registrations = Registration.where.not(reg: used_registration_numbers)
   end
-
   # dans app/controllers/flights_controller.rb
-
 # Nouvelle action pour obtenir les registrations disponibles
-
-
 end

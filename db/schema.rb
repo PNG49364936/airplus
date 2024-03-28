@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_11_154758) do
+ActiveRecord::Schema.define(version: 2024_03_22_170606) do
 
   create_table "aircrafts", force: :cascade do |t|
     t.string "acft"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2024_02_11_154758) do
     t.string "departure_country_name"
     t.string "arrival_place_name"
     t.string "arrival_country_name"
+    t.boolean "is_return_flight", default: false
     t.index ["aircraft_id"], name: "index_flights_on_aircraft_id"
     t.index ["arrival_station_id"], name: "index_flights_on_arrival_station_id"
     t.index ["cabin_id"], name: "index_flights_on_cabin_id"
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 2024_02_11_154758) do
     t.string "reg"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "haul"
   end
 
   create_table "seats", force: :cascade do |t|

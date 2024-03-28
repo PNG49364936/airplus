@@ -25,4 +25,8 @@ class Aircraft < ApplicationRecord
       def upcase_acft
         self.acft = acft.upcase if acft.present?
       end 
+
+      
+
+
 end
