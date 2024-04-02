@@ -61,7 +61,7 @@
                             <td class="text-center"><%= flight.departure_station.name %></td>
                             <td class="text-center"><%= flight.arrival_station.name %></td>
                             <td class="text-center"><%= l(flight.departure_date, format: :default) %></td>
-                            <td class="text-center arrival-date"><%= l(flight.arrival_date, format: :default) %></td>
+                            <td class="text-center"><%= l(flight.arrival_date, format: :default) %></td>
                          <td>
                              <%=link_to"Annuler", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
                              <% unless flight.flight_number.to_i.odd? || unless flight.has_return_flight?%>

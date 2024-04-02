@@ -6,6 +6,7 @@ ruby '3.0.2'
 gem "simple_form"
 gem "httparty"
 gem "ransack"
+gem 'whenever', require: false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4'
