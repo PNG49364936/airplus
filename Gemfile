@@ -6,7 +6,14 @@ ruby '3.0.2'
 gem "simple_form"
 gem "httparty"
 gem "ransack"
+#A enlever
 gem 'whenever', require: false
+# xxxxxx
+gem 'sidekiq'
+gem 'sidekiq-cron'
+gem 'rufus-scheduler'
+
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4'

@@ -27,21 +27,28 @@ class Flight < ApplicationRecord
   
     before_validation :set_station_details
     validate :registration_uniqueness_per_day, unless: :allow_duplicate_registration?
-  
+ 
     
    #validate :allow_duplicate_registration?
-
+   
     
     def has_return_flight?
       Flight.where(flight_number: self.flight_number + 1, departure_station_id: self.arrival_station_id, arrival_station_id: self.departure_station_id).exists?
     end
 
-    private
-
     def self.delete_past_flights
       pp "delete" * 15
+      Rails.logger.info "Starting to delete past flights at #{Time.now}"
       where("departure_date < ?", Date.today).destroy_all
+      Rails.logger.info "Finished deleting past flights at #{Time.now}"
     end
+    def self.print
+      puts"test scgeduler"
+    end
+
+    private
+
+    
 
 
 

@@ -71,7 +71,8 @@
                           </div>
                        <% end %> 
                   </div>-->
-                  <div class="haul form-group">
+                  <div class="haul form-group" data-controller="haul-flights">
+                     <!--data-controller="haul-flights"-->
                       <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
                         <% if @haul.present? %>
                         <%= f.collection_select :haul_id, Haul.all, :id, :name, { include_blank: "Choisir" }, { class: "form-control", data: { action: "change->flight-form#updateStations", flight_form_target: "flightHaul" },class:"custom-width-a" } %>
