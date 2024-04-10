@@ -19,7 +19,7 @@ export default class extends Controller {
     flatpickr(this.rangeTarget, {
       mode: "range",
       dateFormat: "Y-m-d",
-      //minDate: "today",
+      minDate: "today",
       allowInput: true,
       enableTime: false,
       onClose: this.updateDates.bind(this)
