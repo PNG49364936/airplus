@@ -69,6 +69,7 @@ class FlightsController < ApplicationController
   end
 
   def available_registrations
+    haul = params[:haul]
     pp "1" * 100
     departure_date = params[:departure_date]
     puts departure_date

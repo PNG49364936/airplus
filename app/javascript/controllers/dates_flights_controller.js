@@ -2,7 +2,7 @@ import { Controller } from "stimulus";
 import flatpickr from "flatpickr";
 
 export default class extends Controller {
-  static targets = ["range", "startDate", "endDate", "registration"];
+  static targets = ["range", "startDate", "endDate", "registration", "haulSelect"];
   
   connect() {
     console.log("DatesFlightsController connected");
