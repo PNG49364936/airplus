@@ -57,21 +57,8 @@
               </div>
               
               <br>
-             <!--
-                  <div class="registration form-group">
-                      <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
-                      <% if @available_registrations.present? %>
-                          <%= f.collection_select :registration_id, @available_registrations, :id, ->(registration) { "#{registration.reg}" }, { include_blank: "Choisir" }, { class: "form-control" } %> 
-                        <% else %>   
-                          <div class="alert alert-danger" >
-                              No Registration available, create it.
-                          </div>  
-                          <div class="creation btn btn-primary " >
-                              <%= link_to "Créér des immatriculations", new_registration_path, class: "creer text-white" %>
-                          </div>
-                       <% end %> 
-                  </div>-->
-                  <div class="haul form-group" data-controller="haul-flights">
+          
+                  <div class="haul form-group" >
                      <!--data-controller="haul-flights"-->
                       <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
                         <% if @haul.present? %>
