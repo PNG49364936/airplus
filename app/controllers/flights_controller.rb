@@ -18,6 +18,8 @@ class FlightsController < ApplicationController
 
   def new
     @flight = Flight.new
+    @hauls = Haul.all
+    @available_registrations = Registration.all
   end
 
   def create
@@ -68,6 +70,8 @@ class FlightsController < ApplicationController
     render json: { stations: @stations.select(:id, :name).map(&:attributes) }
   end
 
+  
+
   def available_registrations
     haul = params[:haul]
     pp "1" * 100
@@ -89,7 +93,14 @@ class FlightsController < ApplicationController
     render json: @available_registrations.map{|r| {id: r.id, reg: r.reg}}
   end
 
- 
+  #def available_registrations_by_haul
+   # haul_id = params[:haul_id]
+   # available_registrations = Registration.where(haul_id: haul_id)
+  
+   # render json: available_registrations.map{|r| {id: r.id, reg: r.reg}}
+  #end
+
+
 
   private
 
