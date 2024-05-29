@@ -2,10 +2,9 @@ class Registration < ApplicationRecord
     before_validation :upcase_reg
     validate :unique_reg
     validate :validate_code_format
-   
     has_many :flights
     validates :reg, presence: true
-    validates :haul, format: { with: /\A[A-Z]H\z/, message: "doit contenir une lettre suivie de 'H'" }
+    belongs_to :haul
     
    
 

@@ -7,10 +7,10 @@ class Aircraft < ApplicationRecord
     validates :acft, format: { with: /\A[a-zA-Z][0-9]+\z/,
     message:   "doit commencer par une lettre et être suivi de 3 chiffres" }
     has_many :flights, dependent: :destroy
-    validates :haul, length: { within: 2..2, message: "doit contenir 2 lettres maxi"}
-    validates :haul, presence: true, format: { with: /\A[A-Z]{2}\z/,
-    message: "doit contenir uniquement 2 lettres majuscules" }
-    validates :haul, format: { with: /\A[A-Z]H\z/, message: "doit contenir une lettre suivie de 'H'" }
+    belongs_to :haul
+  
+    
+   
 #_________________________________________________________________________________
    private
 

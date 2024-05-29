@@ -59,31 +59,30 @@
               <br>
           
                   <!-- Div parent avec le contrôleur Stimulus spécifié -->
-                     <div class="haul form-group" data-controller="haul-flights">
-                        <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
-                        <% if @haul.present? %>
-                        <%= f.collection_select :haul_id, Haul.all, :id, :name, { include_blank: "Choisir" }, {
+                  <div class="haul form-group" data-controller="haul-flights">
+                    <%= f.label :haul_id, content_tag(:strong, "Haul network:") %>
+                    <% if @haul.present? %>
+                      <%= f.collection_select :haul_id, Haul.all, :id, :name, { include_blank: "Choisir" }, {
                         class: "form-control custom-width-a",
+                        id: "flight_haul_id",
                         data: {
-                          action: "change->haul-flights#updateRegistrations(event) change->flight-form#updateStations(event)",
+                          action: "change->haul-flights#updateRegistrations change->flight-form#updateStations",
                           flight_form_target: "flightHaul",
                           dates_flights_target: 'haulSelect'
                         }
                       } %>
-
-
-                        <% else %>
-                          <div class="alert alert-danger">
-                            No Haul code available, create it.
-                          </div>
-                          <div class="creation btn btn-primary">
-                            <%= link_to "Créér des haul codes", new_haul_path, class: "creer text-white" %>
-                          </div>
-                        <% end %>
+                    <% else %>
+                      <div class="alert alert-danger">
+                        No Haul code available, create it.
                       </div>
+                      <div class="creation btn btn-primary">
+                        <%= link_to "Créér des haul codes", new_haul_path, class: "creer text-white" %>
+                      </div>
+                    <% end %>
+                  </div>
 
                   <br>
-                  <div class="registration form-group" >
+                  <div class="registration form-group" data-controller="dates-flights">
                     <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
                        <!--<%= debug(@available_registrations) %>-->
                     <% if @available_registrations.present? %>

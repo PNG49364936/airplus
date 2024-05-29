@@ -7,13 +7,8 @@ export default class extends Controller {
 
   connect() {
     console.log("Le contrôleur DatesFlights est connecté.");
-
-    //if (this.hasRegistrationTarget) {
-     // console.log("La cible d'immatriculation a été trouvée :", this.registrationTarget);
-   // } else {
-    //  console.log("La cible d'immatriculation n'a pas été trouvée.");
-    //}
-
+    this.departureDate = null;
+    this.selectedHaulId = null;
     this.initFlatpickr();
   }
 
@@ -39,35 +34,19 @@ export default class extends Controller {
       console.log("Date de départ formatée :", formattedStartDate);
       console.log("Date d'arrivée formatée :", formattedEndDate);
 
-      // Mettre à jour les immatriculations disponibles en fonction de la date de départ sélectionnée
-      this.updateRegistrations(formattedStartDate);
+      this.departureDate = formattedStartDate;
+      this.updateRegistrations();
     }
   }
 
-  updateRegistrations(departureDate) {
+  updateRegistrations() {
+    console.log("controlleur update registrations")
     const haulSelect = document.querySelector('#flight_haul_id');
-    const selectedHaulId = haulSelect ? haulSelect.value : null;
+    this.selectedHaulId = haulSelect ? haulSelect.value : null;
+    console.log("selectedHaulId", this.selectedHaulId);
 
-    haulFlightsUpdateRegistrations(selectedHaulId, departureDate);
-  }
-
-  updateRegistrationSelect(data) {
-    console.log("updateRegistrationSelect")
-    const registrationSelect = this.registrationTarget;
-    console.log('const registrationSelect',)
-    registrationSelect.innerHTML = '';
-
-    if (data.length === 0) {
-      const noOption = new Option("Aucune immatriculation disponible", "");
-      registrationSelect.appendChild(noOption);
-    } else {
-      const defaultOption = new Option("Choisir", "");
-      registrationSelect.appendChild(defaultOption);
-
-      data.forEach(registration => {
-        const option = new Option(registration.reg, registration.id, registration.haul);
-        registrationSelect.appendChild(option);
-      });
+    if (this.departureDate && this.selectedHaulId) {
+      haulFlightsUpdateRegistrations(this.selectedHaulId, this.departureDate);
     }
   }
 
@@ -78,6 +57,6 @@ export default class extends Controller {
     let month = (dateInUTC.getUTCMonth() + 1).toString().padStart(2, '0');
     let year = dateInUTC.getUTCFullYear();
 
-    return `${year}.${month}.${day}`;
+    return `${year}-${month}-${day}`;
   }
 }

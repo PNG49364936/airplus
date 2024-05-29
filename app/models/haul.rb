@@ -6,6 +6,8 @@ class Haul < ApplicationRecord
     message: "doit contenir uniquement 2 lettres majuscules" }
     validates :name, format: { with: /\A[A-Z]H\z/, message: "doit contenir une lettre suivie de 'H'" }
     has_many :flights
+    has_many :aircrafts
+    has_many :registrations
     
 
 private

@@ -29,8 +29,8 @@
                         </div>
                         <br><br>
                         <div class="col-2.5">
-                            <%=  f.label :acft,content_tag(:strong, 'Aircraft haul:') %>
-                            <%=  f.text_field :haul, class:"rounded-box"%>
+                            <%= f.label :haul_id, content_tag(:strong, 'Aircraft  haul:') %>
+        <%= f.collection_select :haul_id, @hauls, :id, :name, { prompt: 'Select Haul' }, class: "rounded-box" %>
                         </div>
                         <br>
                         

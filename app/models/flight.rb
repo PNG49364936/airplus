@@ -63,18 +63,21 @@ class Flight < ApplicationRecord
         # Obtenez le haul de l'avion
         return unless aircraft.present?
         # Normalisez la casse pour la comparaison
-        aircraft_haul = aircraft.haul
+        pp "aircraft"*10
+       
+        aircraft_haul = aircraft.haul.name
+        pp "self" * 10
+        pp self.haul
         flight_haul = self.haul
         # Vérifiez si les conditions spécifiées sont remplies
         # Normalisez la casse pour la comparaison
-        aircraft_haul_upcase = aircraft.haul.upcase
-        flight_haul_upcase = self.haul.name.upcase
+        
         # Vérifiez si les conditions spécifiées sont remplies
-        if aircraft_haul_upcase == "MH" && flight_haul_upcase != "MH"
+        if aircraft.haul == "MH" && flight.haul != "MH"
           
-          pp flight_haul_upcase 
+         
             errors.add(:base, "Attention: Un avion avec un réseau de haul 'MH' ne peut effectuer des vols LH'.")
-          elsif aircraft_haul_upcase == "LH" && (flight_haul_upcase != "LH" && flight_haul_upcase != "MH")
+          elsif aircraft.haul == "LH" && (flight_haul != "LH" && flight_haul != "MH")
             errors.add(:base, "Attention: Un avion avec un réseau de haul 'LH' ne peut effectuer que des vols de type 'LH' ou 'MH'.")
         end
       end

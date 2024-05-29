@@ -15,6 +15,8 @@ class AircraftsController < ApplicationController
     def new
     @aircrafts = Aircraft.all
     @aircraft = Aircraft.new
+    @hauls = Haul.all
+   
     
     end
 
@@ -23,7 +25,9 @@ class AircraftsController < ApplicationController
        if @aircraft.save
         redirect_to @aircraft, notice: 'Aircraft was successfully created.'
         else
-        render :new
+             @hauls = Haul.all
+            render :new
+
        end
     end
 
@@ -58,7 +62,7 @@ class AircraftsController < ApplicationController
         end
 
         def params_aircraft
-            params.require(:aircraft).permit(:acft, :aircraft_class, :seats, :registration, :haul) # Liste des attributs que vous utilisez
+            params.require(:aircraft).permit(:acft, :aircraft_class, :seats, :registration, :haul, :haul_id) # Liste des attributs que vous utilisez
         end
     
 

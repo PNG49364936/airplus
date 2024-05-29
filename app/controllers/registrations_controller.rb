@@ -6,6 +6,7 @@ class RegistrationsController < ApplicationController
   
   def index
     @registrations = Registration.all
+    
   end
 
   def show
@@ -15,6 +16,8 @@ class RegistrationsController < ApplicationController
   def new
     @registration = Registration.new
     @registrations = Registration.all
+    @hauls = Haul.all
+ 
     
   end
 
@@ -23,6 +26,7 @@ class RegistrationsController < ApplicationController
         if @registration.save
             redirect_to @registration, notice: 'Registration was successfully created.'
           else
+            @hauls = Haul.all
             render :new 
         end
   end
@@ -57,7 +61,7 @@ class RegistrationsController < ApplicationController
     end
 
     def params_registration 
-    params.require(:registration).permit(:reg, :haul)
+    params.require(:registration).permit(:reg, :haul_id)
     end
 
 end

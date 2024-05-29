@@ -73,24 +73,29 @@ class FlightsController < ApplicationController
   
 
   def available_registrations
-    haul = params[:haul]
+    haul_id = params[:haul_id].to_i
+    pp "a"*100
+    puts haul_id
+    logger.debug "Haul ID__________: #{haul_id}"
     pp "1" * 100
     departure_date = params[:departure_date]
+    logger.debug "Departure date__________: #{departure_date}"
     puts departure_date
     used_registrations = Flight.where(departure_date: departure_date).pluck(:registration_id)
     pp "2" * 100
-   #puts used_registrations
-    available_registrations = Registration.where.not(id: used_registrations)
+   puts used_registrations.inspect
+   available_registrations = Registration.where.not(id: used_registrations).where(haul_id: haul_id)
     #puts available_registrations
     # Renvoyer les registrations disponibles au format JSON
         available_registrations.each do |registration|
-          puts "ID: #{registration.id}, Reg: #{registration.reg}"
+          puts "Available -- ID: #{registration.id}, Reg: #{registration.reg}, Haul: #{registration.haul} "
         end
     @available_registrations = available_registrations
     puts @available_registrations
     logger.debug "@available_registrations: #{@available_registrations.inspect}"
     #render json: available_registrations
-    render json: @available_registrations.map{|r| {id: r.id, reg: r.reg}}
+    
+    render json: @available_registrations.map{|r| {id: r.id, reg: r.reg, haul: r.haul}}
   end
 
   #def available_registrations_by_haul

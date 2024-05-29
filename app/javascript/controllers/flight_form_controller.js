@@ -11,6 +11,7 @@ export default class extends Controller {
   updateStationsOnHaulChange() {
     this.flightHaulTarget.addEventListener('change', () => {
       const flightHaulValue = this.flightHaulTarget.value;
+     // console.log("flighthaul",flightHaulValue)
       this.updateStationOptions(this.departureStationTarget, flightHaulValue);
       this.updateStationOptions(this.arrivalStationTarget, flightHaulValue);
     });
