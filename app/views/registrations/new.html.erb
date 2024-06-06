@@ -5,7 +5,7 @@
      
                     <h4>Registration(s) déjà créés :</h4>
                           <td><%= @registrations.map(&:reg).join(', ') %></td>
-                          <td><%= @registrations.map(&:haul_id).join(', ') %></td>
+                         <td><%= @registrations.map { |registration| registration.haul.name }.join(', ') %></td>
            <%else%>
                 <div class="alert alert-danger">
               

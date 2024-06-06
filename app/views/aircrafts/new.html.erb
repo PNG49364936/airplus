@@ -1,12 +1,11 @@
 <div class="container col-12">
 
     <div class="bordered">
-        <%=pp @aircrafts%>
+      
         <% if @aircrafts.present? %>
 
                     <h4>Aircraft(s) déjà créés :</h4>
-                          <td><%= @aircrafts.map(&:acft).join(', ') %></td>
-                          
+                         <%= @aircrafts.map { |aircraft| "#{aircraft.acft} #{aircraft.haul.name}" }.join(', ') %>
            <%else%>
                 <div class="alert alert-danger">
                     No aircraft, create it.

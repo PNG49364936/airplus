@@ -1,31 +1,48 @@
 <div class="container col-12">
-  <% if @flight.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@flight.errors.count, "error") %> prohibited this flight from being saved:</h2>
 
-    <ul>
-      <% @flight.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+    <div class="bordered">
+       
+              <% if @flights.present? %>
+                    <h4>Flights(s) déjà créés :</h4>
+                         <%= @flights.map { |flight| "#{flight.airline_code.code}#{flight.flight_number} #{flight.haul.name} #{flight.arrival_station.name}" }.join(', ') %>
+           <%else%>
+                <div class="alert alert-danger">
+                    No flight.
+                </div>
+        <% end %>
+    </div>
+
+
+    <% if @flight.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@flight.errors.count, "error") %> prohibited this flight from being saved:</h2>
+
+          <ul>
+            <% @flight.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+   <% end %>
     
           <div>
               <h1>Créer Flight Aircraft</h1>
           </div>
   
-  <div class="row">
-      <div class="col-3 mt-3" >
-          <%= simple_form_for(@flight) do |f| %>
-          <div data-controller="flight-form">
-              <% if f.object.errors[:base].any? %>
-                      <div class="alert alert-danger">
-                              <% f.object.errors[:base].each do |error| %>
-                                <%= error %>
-                              <% end %>
+                      <div class="row">
+                          <div class="col-3 mt-3" >
+                              <%= simple_form_for(@flight) do |f| %>
+                              <div data-controller="flight-form">
+                                  <% if f.object.errors[:base].any? %>
+                                          <div class="alert alert-danger">
+                                                  <% f.object.errors[:base].each do |error| %>
+                                                    <%= error %>
+                                                  <% end %>
                       </div>
               <% end %>
+
+              
+     <br> <br>
 
               <div class="col-2.5" data-controller = "dates-flights">
                     <%= f.label :date_range, content_tag(:strong, 'Dates de vol :') %>
@@ -84,9 +101,11 @@
                   <br>
                   <div class="registration form-group" data-controller="dates-flights">
                     <%= f.label :registration_id, content_tag(:strong, "Registration:") %>
-                       <!--<%= debug(@available_registrations) %>-->
-                    <% if @available_registrations.present? %>
-                    <!--<%= debug(@available_registrations) %>-->
+                     <div id="registration-message" class="d-none"></div>
+                  
+                        <!--  <%= debug(@available_registrations) %>-->
+                    <% if @available_registrations.any? %>
+               
                    <%= f.collection_select :registration_id, @available_registrations, :id, :reg, { include_blank: "Choisir" }, { class: "form-control custom-width-a", data: { dates_flights_target: "registration" }, id: "registrationSelect" } %>
                   <% @available_registrations.each do |registration| %>
                  <!-- <%= pp "ID: #{registration.id}, Reg: #{registration.reg}" %>-->
@@ -107,7 +126,10 @@
                   <div class="aircraft form-group">
                       <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
                       <% if @aircraft.present? %>
-                        <%= f.collection_select :aircraft_id, Aircraft.all, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" ,  class: "form-control" } %>         
+                        <%= f.collection_select :aircraft_id, @available_aircrafts, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" ,  class: "form-control" } %>         
+                        <% @available_aircrafts.each do |aircraft| %>
+                           <% end %> 
+                            <%= debug(@available_aircrafts) %>
                         <% else %> 
                         <div class="alert alert-danger" >
                           No Acft available, create it.

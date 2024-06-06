@@ -4,6 +4,7 @@ class FlightsController < ApplicationController
   before_action :set_flight, only: [:show, :edit, :update, :destroy, :create_return]
   before_action :set_select_collections, only: [:new, :create, :edit, :update]
   before_action :set_available_registrations
+  before_action :set_available_aircrafts
 
   def index
     @flights = Flight.all
@@ -19,7 +20,9 @@ class FlightsController < ApplicationController
   def new
     @flight = Flight.new
     @hauls = Haul.all
-    @available_registrations = Registration.all
+
+    @flights = Flight.all
+    Rails.logger.debug "Available RegistrationsSSSS: #{@available_registrations.inspect}"
   end
 
   def create
@@ -91,7 +94,7 @@ class FlightsController < ApplicationController
           puts "Available -- ID: #{registration.id}, Reg: #{registration.reg}, Haul: #{registration.haul} "
         end
     @available_registrations = available_registrations
-    puts @available_registrations
+    puts " xxx @available_registrations"
     logger.debug "@available_registrations: #{@available_registrations.inspect}"
     #render json: available_registrations
     
@@ -104,6 +107,17 @@ class FlightsController < ApplicationController
   
    # render json: available_registrations.map{|r| {id: r.id, reg: r.reg}}
   #end
+
+ def available_aircrafts
+  puts "controller available_aircrafts"*100
+    haul_id = params[:haul_id].to_i
+    puts "haul_id available_aircrafts"*10
+    puts haul_id.inspect
+    available_aircrafts = Aircraft.where(haul_id: haul_id)
+    @available_aircrafts = available_aircrafts
+    logger.debug "@available_aircraftssssss: #{@available_aircrafts.inspect}"
+    render json: @available_aircrafts.map{|r| {id: r.id, acft: r.acft}}
+  end
 
 
 
@@ -121,6 +135,12 @@ class FlightsController < ApplicationController
     pp "*"*20
     @available_registrations = Registration.all # Exemple simple de définition
     Rails.logger.debug "@available_registrations set with #{@available_registrations.count} items"
+  end
+
+  def set_available_aircrafts
+    puts "private available_aircraft" * 10
+    @available_aircrafts = Aircraft.all
+    Rails.logger.debug "@available_aircrafts set with #{@available_aircrafts.count} items"
   end
 
   def set_select_collections

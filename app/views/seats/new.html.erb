@@ -12,6 +12,17 @@
         </div>
     <% end %> 
 
+    <div class="bordered">
+                <% if @seats.present? %>
+                            <h4>Seat(s) déjà créés :</h4>
+                                  <td><%= @seats.map(&:number).join(', ') %></td>
+                 <%else%>
+                 <div class="alert alert-danger">
+                    No seat, create it.
+                </div>
+                <% end %>
+            </div>
+
         <div class="col-3 mt-5">
             <%= simple_form_for(@seat) do |f| %>
                         <div class="col-2.5">
