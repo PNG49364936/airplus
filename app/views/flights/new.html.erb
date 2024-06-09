@@ -83,9 +83,11 @@
                         class: "form-control custom-width-a",
                         id: "flight_haul_id",
                         data: {
-                          action: "change->haul-flights#updateRegistrations change->flight-form#updateStations",
+                          action: "change->haul-flights#updateRegistrations change->flight-form#updateStations change->aircrafts-flights#updateAircrafts",
                           flight_form_target: "flightHaul",
-                          dates_flights_target: 'haulSelect'
+                          dates_flights_target: 'haulSelect',
+                         
+                          
                         }
                       } %>
                     <% else %>
@@ -123,13 +125,13 @@
                   
                     
                   <br>
-                  <div class="aircraft form-group">
+                  <div class="aircraft form-group" data-controller="aircraft-flights">
                       <%= f.label :aircraft_id, content_tag(:strong, "Aircraft type:") %>
                       <% if @aircraft.present? %>
-                        <%= f.collection_select :aircraft_id, @available_aircrafts, :id, ->(aircraft) { "#{aircraft.acft}" }, { include_blank: "Choisir" ,  class: "form-control" } %>         
+                       <%= f.collection_select :aircraft_id, @available_aircrafts, :id, :acft, { include_blank: "Choisir" }, { id: "aircraftSelect", class: "form-control custom-width-a", data: { aircrafts_flights_target: "aircraftSelect" }} %>
                         <% @available_aircrafts.each do |aircraft| %>
                            <% end %> 
-                            <%= debug(@available_aircrafts) %>
+                           <!--  <%= debug(@available_aircrafts) %>-->
                         <% else %> 
                         <div class="alert alert-danger" >
                           No Acft available, create it.

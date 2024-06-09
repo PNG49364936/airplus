@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'registrations/destroy'
   get 'pages/operations'
   get 'flights/available_registrations', to: 'flights#available_registrations'
+  get 'flights/available_aircrafts', to: 'flights#available_aircrafts', as: 'flights_available_aircrafts'
   root to: 'pages#home'
  
 
