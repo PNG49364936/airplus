@@ -108,12 +108,18 @@ class FlightsController < ApplicationController
    # render json: available_registrations.map{|r| {id: r.id, reg: r.reg}}
   #end
 
- def available_aircrafts
-  puts "controller available_aircrafts"*100
+  def available_aircrafts
+    puts "controller available_aircrafts"*100
     haul_id = params[:haul_id].to_i
     puts "haul_id available_aircrafts"*10
     puts haul_id.inspect
-    available_aircrafts = Aircraft.where(haul_id: haul_id)
+  
+    if haul_id == Haul.find_by(name: 'MH').id
+      available_aircrafts = Aircraft.where(haul_id: haul_id)
+    else
+      available_aircrafts = Aircraft.where(haul_id: [Haul.find_by(name: 'LH').id, Haul.find_by(name: 'MH').id])
+    end
+  
     @available_aircrafts = available_aircrafts
     logger.debug "@available_aircraftssssss: #{@available_aircrafts.inspect}"
     render json: @available_aircrafts.map{|r| {id: r.id, acft: r.acft}}
