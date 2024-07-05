@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'pages/bigmap', to: 'pages#bigmap'
   get 'pages/home', to: 'pages#home'
   get 'pages/operations', to: 'pages#operations'
-  get 'pages/about', to: 'pages#about'
+  get 'pages/airplus', to: 'pages#airplus'
   get 'flights/stations', to: 'flights#stations'
   get 'geocoding/show', to: 'geocoding#show'
   get 'geocoding/geocode', to: 'geocoding#geocode'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'pages/operations'
   get 'flights/available_registrations', to: 'flights#available_registrations'
   get 'flights/available_aircrafts', to: 'flights#available_aircrafts', as: 'flights_available_aircrafts'
-  root to: 'pages#home'
+  root to: 'pages#airplus'
  
 
   resources :aircrafts

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   
-  before_action :set_map_data, only: [:home, :bigmap]
+  before_action :set_map_data, only: [:home, :bigmap, :airplus]
   
   
   
@@ -9,6 +9,9 @@ class PagesController < ApplicationController
   end 
 
   def home
+  end
+
+  def airplus
   end
 
 
