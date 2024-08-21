@@ -1,88 +1,72 @@
-<body  class="background-color">
-    
-
-
-        <div class="container mt-5 " id="mycontainer">
-            <h3>Operating aircrafts specifications</h3>
-            <table class=" table table-bordered my-custom-background" style="border: 4px solid black; ">
-          
-        
-                <thead>
-                    <tr>
-                        
-                    
-                    </tr>
-                </thead>
-                    <tbody id="test">
-                        <tr>
-                            <td><strong>Aircrafts:</strong></td>
-                            <td><%= link_to "Créer type avion", new_aircraft_path, class: "creer" %></td>
-                            <td><%= link_to "Liste types avion", aircrafts_path, class: "creer" %></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Network:</strong></td>
-                            <td><%= link_to "Créer Réseau", new_haul_path, class: "creer" %></td>
-                            <td><%= link_to "Liste des réseaux", hauls_path, class: "creer" %></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Registrations:</strong></td>
-                            <td><%= link_to "Créér des immatriculations", new_registration_path, class: "creer" %></td>
-                            <td><%= link_to "Liste des immatriculations", registrations_path, class: "creer" %></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Cabins:</strong></td>
-                            <td><%= link_to "Créer cabins", new_cabin_path, class: "creer" %></td>
-                            <td><%= link_to "Liste des cabins", cabins_path, class: "creer" %></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Seats:</strong></td>
-                            <td><%= link_to "Créer Seats number", new_seat_path, class: "creer" %></td>
-                            <td><%= link_to "Liste des Seats number", seats_path, class: "creer" %></td>
-                        </tr>
-                    </tbody>
-            </table>
-            <br>
-            <table class="table table-bordered" style="border: 4px solid black;">
-                <h3>Operating flights</h3>
-                <thead>
-                    <tr>
-                    
-                    </tr>
-                </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Flight ops:</strong></td>
-                            <td><%= link_to "Créer Flight ops", new_flight_path, class: "creer" %></td>
-                            <td><%= link_to "Liste flights ops", flights_path, class: "creer" %></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Stations:</strong></td>
-                            <td><%= link_to "Créer Stations", new_station_path, class: "creer" %></td>
-                            <td><%= link_to "Liste stations", stations_path, class: "creer" %></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Airlines:</strong></td>
-                            <td><%= link_to "Créer Airline codes", new_airline_code_path, class: "creer" %></td>
-                            <td><%= link_to "Liste Airline codes", airline_codes_path, class: "creer" %></td>
-                        </tr>
-                        
-                    </tbody>
-            </table>
-            <br><br><br>
-            <div>
-                <span><%=link_to"Back Home Operations",pages_home_path,class: "btn btn-primary" %></span>
-                 <span><%=link_to"AIR PLUS front page",pages_airplus_path,class: "btn btn-primary" %></span>
-            </div>
-
-
-
-
-
-
-
-
-
+<body class="background-color">
+    <div class="container mt-5" id="mycontainer">
+        <h2 class="text-center mb-4">Operating Aircrafts Specifications</h2>
+        <table class="table table-striped table-bordered my-custom-background rounded-shadow">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Category</th>
+                    <th>Create</th>
+                    <th>List</th>
+                </tr>
+            </thead>
+            <tbody id="test">
+                <tr>
+                    <td><strong>Aircrafts:</strong></td>
+                    <td><%= link_to "Créer type avion", new_aircraft_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste types avion", aircrafts_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Network:</strong></td>
+                    <td><%= link_to "Créer Réseau", new_haul_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste des réseaux", hauls_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Registrations:</strong></td>
+                    <td><%= link_to "Créér des immatriculations", new_registration_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste des immatriculations", registrations_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Cabins:</strong></td>
+                    <td><%= link_to "Créer cabins", new_cabin_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste des cabins", cabins_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Seats:</strong></td>
+                    <td><%= link_to "Créer Seats number", new_seat_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste des Seats number", seats_path, class: "btn btn-info" %></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="text-center my-4">Operating Flights</h2>
+        <table class="table table-striped table-bordered rounded-shadow">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Category</th>
+                    <th>Create</th>
+                    <th>List</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Flight ops:</strong></td>
+                    <td><%= link_to "Créer Flight ops", new_flight_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste flights ops", flights_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Stations:</strong></td>
+                    <td><%= link_to "Créer Stations", new_station_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste stations", stations_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Airlines:</strong></td>
+                    <td><%= link_to "Créer Airline codes", new_airline_code_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste Airline codes", airline_codes_path, class: "btn btn-info" %></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center mt-5">
+            <%= link_to "Back Home Operations", pages_home_path, class: "btn btn-primary mx-2" %>
+            <%= link_to "AIR PLUS front page", pages_airplus_path, class: "btn btn-primary mx-2" %>
         </div>
-
+    </div>
 </body>
-

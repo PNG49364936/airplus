@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'customers/index'
+  get 'customers/show'
+  get 'customers/new'
+  get 'customers/create'
+  get 'customers/edit'
+  get 'customers/update'
+  get 'customers/destroy'
   get 'pages/bigmap', to: 'pages#bigmap'
   get 'pages/home', to: 'pages#home'
   get 'pages/operations', to: 'pages#operations'
@@ -34,6 +41,7 @@ Rails.application.routes.draw do
   resources :hauls
   resources :stations
   resources :airline_codes
+  resources :customers
 
   resources :flights do
     member do

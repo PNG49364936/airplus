@@ -11,6 +11,8 @@ class FlightsController < ApplicationController
     @aircrafts = Aircraft.all
     @q = Flight.ransack(params[:q])
     @flights = @q.result.includes(:airline_code)
+    @airlineCodes = AirlineCode.all
+    @Stations = Station.all
    
   end
 
