@@ -1,8 +1,10 @@
+ 
+
 <div class="container col-12 mt-50">
 
     <h1>Flights</h1>
     <div class="search" data-controller="form-reset">
-      <%= search_form_for @q, html: { data: { target: 'form-reset.form' } } do |form| %>
+      <%= search_form_for @q, url: customers_book_path, method: :get, html: { data: { target: 'form-reset.form' } } do |form| %>
         <div class="row">
           <div class="form-group search-field col">
             <%= form.label :departure_date, "Date de départ" %>
@@ -93,12 +95,11 @@
          </table>
         </div>
 
+
+
          <br>
 
         <div class="link">
           <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
-          <span><%=link_to"Flight list", flights_path, class: "btn btn-danger btn-margin"%></span>
+          <span><%=link_to"Book again", customers_book_path, class: "btn btn-danger btn-margin"%></span>
         </div>
-   
-
-</div>

@@ -33,6 +33,15 @@ class CustomersController < ApplicationController
   def destroy
   end
 
+  def book
+    @flights = Flight.all
+    @aircrafts = Aircraft.all
+    @q = Flight.ransack(params[:q])
+    @flights = @q.result.includes(:airline_code)
+    @airlineCodes = AirlineCode.all
+    @Stations = Station.all
+  end
+
   private
 
   def set_customer

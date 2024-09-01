@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'customers/edit'
   get 'customers/update'
   get 'customers/destroy'
+  get 'customers/book'
   get 'pages/bigmap', to: 'pages#bigmap'
   get 'pages/home', to: 'pages#home'
   get 'pages/operations', to: 'pages#operations'
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
   get 'pages/operations'
   get 'flights/available_registrations', to: 'flights#available_registrations'
   get 'flights/available_aircrafts', to: 'flights#available_aircrafts', as: 'flights_available_aircrafts'
+  
   root to: 'pages#airplus'
  
 
