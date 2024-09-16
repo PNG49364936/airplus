@@ -1,48 +1,56 @@
- 
+<% if @flights.any? %>
+<% pp "5" * 100 %>
+  <% puts "Il y a des vols disponibles : #{@flights.inspect}" %>
+<% else %>
 
-<div class="container col-12 mt-50">
+<% pp "6" * 100 %>
+  <% puts "Aucun vol disponible." %>
+<% end %>
 
-    <h1>Flights</h1>
-    <div class="search" data-controller="form-reset">
-      <%= search_form_for @q, url: customers_book_path, method: :get, html: { data: { target: 'form-reset.form' } } do |form| %>
-        <div class="row">
-          <div class="form-group search-field col">
-            <%= form.label :departure_date, "Date de départ" %>
-            <%= form.date_select :departure_date_eq, {
-              order: [:day, :month, :year],
-              start_year: Date.current.year,
-              end_year: Date.current.year + 1,
-             prompt: { day: "Day", month: "Month", year: "Year" }
-            }, class: "form-control custom-width date-select-centered", style: "width: 100px;" %>
-          </div>
-          <div class="form-group search-field col">
-            <%= form.label :airline_code_code_cont, "Code compagnie?" %>
-            <%= form.collection_select :airline_code_id_eq, @airlineCodes, :id, :code, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
-          </div>
-          <div class="form-group search-field col">
-            <%= form.label :aircraft_acft_cont, "Type d'avion?" %>
-            <%= form.collection_select :aircraft_id_eq, @aircrafts, :id, :acft, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
-          </div>
-          <div class="form-group search-field col">
-            <%= form.label :departure_station_name_cont, "Station de départ?" %>
-            <%= form.collection_select :departure_station_id_eq, @Stations, :id, :name, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
-          </div>
-          <div class="form-group search-field col">
-            <%= form.label :arrival_station_name_eq, "Station d'arrivée?" %>
-            <%= form.collection_select :arrival_station_id_eq, @Stations, :id, :name, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
-          </div>
-        </div>
-        <br><br>
-        <div class="form-group">
-          <%= form.submit class: "btn btn-primary btn-sm" %>
-          <%= button_tag(type: 'button', class: 'btn btn-secondary btn-sm', 'data-action': 'form-reset#reset') do %>
-            Réinitialiser
+    <div class="container col-12 mt-50">
+
+        <h1>Book flights</h1>
+        <div class="search" data-controller="form-reset">
+        
+          <%= search_form_for @q, url: customers_book_path, method: :get, html: { data: { target: 'form-reset.form' } } do |form| %>
+            <div class="row">
+              <div class="form-group search-field col">
+                <%= form.label :departure_date, "Date de départ" %>
+                <%= form.date_select :departure_date_eq, {
+                  order: [:day, :month, :year],
+                  start_year: Date.current.year,
+                  end_year: Date.current.year + 1,
+                prompt: { day: "Day", month: "Month", year: "Year" }
+                }, class: "form-control custom-width date-select-centered", style: "width: 100px;" %>
+              </div>
+              <div class="form-group search-field col">
+                <%= form.label :airline_code_code_cont, "Code compagnie?" %>
+                <%= form.collection_select :airline_code_id_eq, @airlineCodes, :id, :code, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
+              </div>
+              <div class="form-group search-field col">
+                <%= form.label :aircraft_acft_cont, "Type d'avion?" %>
+                <%= form.collection_select :aircraft_id_eq, @aircrafts, :id, :acft, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
+              </div>
+              <div class="form-group search-field col">
+                <%= form.label :departure_station_name_cont, "Station de départ?" %>
+                <%= form.collection_select :departure_station_id_eq, @Stations, :id, :name, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
+              </div>
+              <div class="form-group search-field col">
+                <%= form.label :arrival_station_name_eq, "Station d'arrivée?" %>
+                <%= form.collection_select :arrival_station_id_eq, @Stations, :id, :name, { include_blank: "Select" }, class: "form-control custom-width date-select-centered", style: "width: 95px;" %>
+              </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+              <%= form.submit class: "btn btn-primary btn-sm" %>
+              <%= button_tag(type: 'button', class: 'btn btn-secondary btn-sm', 'data-action': 'form-reset#reset') do %>
+                Réinitialiser
+              <% end %>
+            </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
-    
-    
+        
+        
     
     
 
@@ -81,9 +89,7 @@
                             <td class="text-center"><%= l(flight.arrival_date, format: :default) %></td>
                          <td>
                              <%=link_to"Cancel", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
-                             <% unless flight.flight_number.to_i.odd? || unless flight.has_return_flight?%>
-                                <td><%= link_to 'Return?', create_return_flight_path(flight), method: :post, class: "btn btn-danger btn-margin", data: { confirm: 'Êtes-vous sûr de vouloir créer un vol retour pour ce vol ?' } %></td>
-                                 <% end %>  <% end %> 
+                           
                               
           
                          </td>
@@ -103,3 +109,4 @@
           <span><%=link_to"Home",pages_operations_path,class: "btn btn-primary" %></span> 
           <span><%=link_to"Book again", customers_book_path, class: "btn btn-danger btn-margin"%></span>
         </div>
+

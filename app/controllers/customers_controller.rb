@@ -34,14 +34,17 @@ class CustomersController < ApplicationController
   end
 
   def book
-    @flights = Flight.all
-    @aircrafts = Aircraft.all
     @q = Flight.ransack(params[:q])
-    @flights = @q.result.includes(:airline_code)
+    @flights = if params[:q].present?
+      @q.result.includes(:airline_code, :registration, :aircraft, :haul, :cabin, :seat, :departure_station, :arrival_station)
+    else
+      Flight.none # Ne renvoie aucun vol initialement
+    end
+    
+    @aircrafts = Aircraft.all
     @airlineCodes = AirlineCode.all
     @Stations = Station.all
   end
-
   private
 
   def set_customer
