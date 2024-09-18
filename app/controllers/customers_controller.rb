@@ -10,18 +10,23 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
+    if params[:flight_id].present?
+      @flight = Flight.find(params[:flight_id])
+    else
+      redirect_to customers_book_path, notice: 'Please select a flight first.'
+    end
   end
 
   def create
     @customer = Customer.new(params_customer)
+    @flight = Flight.find(params[:flight_id])
+
     if @customer.save
-      redirect_to @customer, notice: 'Customer was successfully created.'
-      else
-           @customers = Customer.all
-          render :new
-
-     end
-
+      booking = Booking.create(customer: @customer, flight: @flight)
+      redirect_to @customer, notice: 'Customer was successfully booked on the flight.'
+    else
+      render :new
+    end
   end
 
   def edit
@@ -45,6 +50,11 @@ class CustomersController < ApplicationController
     @airlineCodes = AirlineCode.all
     @Stations = Station.all
   end
+
+  def reset_search
+    @flights = Flight.none
+    render json: { status: 'success' }
+  end
   private
 
   def set_customer
@@ -52,7 +62,7 @@ class CustomersController < ApplicationController
  end
 
   def params_customer
-    params.require(:customer).permit(:name,:first_name) # Liste des attributs que vous utilisez
+    params.require(:customer).permit(:name,  :first_name) # Liste des attributs que vous utilisez
   end
 
 end

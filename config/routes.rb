@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   resources :airline_codes
   resources :customers
 
+   post 'customers/reset_search', to: 'customers#reset_search'
+ 
   resources :flights do
     member do
       post 'create_return'

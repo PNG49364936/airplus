@@ -10,7 +10,7 @@
     <div class="container col-12 mt-50">
 
         <h1>Book flights</h1>
-        <div class="search" data-controller="form-reset">
+        <div class="search ramsaq" data-controller="form-reset">
         
           <%= search_form_for @q, url: customers_book_path, method: :get, html: { data: { target: 'form-reset.form' } } do |form| %>
             <div class="row">
@@ -43,7 +43,7 @@
             <br><br>
             <div class="form-group">
               <%= form.submit class: "btn btn-primary btn-sm" %>
-              <%= button_tag(type: 'button', class: 'btn btn-secondary btn-sm', 'data-action': 'form-reset#reset') do %>
+              <%= button_tag(type: 'button', class: 'btn btn-danger btn-sm', 'data-action': 'form-reset#reset') do %>
                 Réinitialiser
               <% end %>
             </div>
@@ -88,7 +88,7 @@
                             <td class="text-center"><%= l(flight.departure_date, format: :default) %></td>
                             <td class="text-center"><%= l(flight.arrival_date, format: :default) %></td>
                          <td>
-                             <%=link_to"Cancel", flight_path(flight),method: :delete, class: "btn btn-danger btn-margin"%>
+                             <%= link_to "Book Flight", new_customer_path(flight_id: flight.id), class: "btn btn-success btn-margin" %>
                            
                               
           
