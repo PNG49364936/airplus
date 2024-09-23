@@ -28,7 +28,8 @@ class Flight < ApplicationRecord
     before_validation :set_station_details
     validate :registration_uniqueness_per_day, unless: :allow_duplicate_registration?
  
-    
+    has_many :bookings
+    has_many :customers, through: :bookings
    #validate :allow_duplicate_registration?
    
     

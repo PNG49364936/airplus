@@ -1,0 +1,28 @@
+.table.customers {
+  width: 50%; // Réduire la largeur de la table à 50%
+  margin: 20px auto; // Centrer la table
+  border-collapse: collapse;
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  th {
+    color: #000; // Couleur noire pour les noms et prénoms
+  }
+}

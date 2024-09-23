@@ -1,0 +1,28 @@
+
+<div class="container">
+    
+
+
+
+        <h1 class="titre">Customers for Flight <%= @flight.flight_number %></h1>
+
+        <table class="table customers">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>First Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @customers.each do |customer| %>
+            <tr>
+                <td><%= customer.name %></td>
+                <td><%= customer.first_name %></td>
+            </tr>
+            <% end %>
+        </tbody>
+        </table>
+
+        <%= link_to 'Back to Flights', customers_list_path, class: 'btn btn-primary' %>
+
+    </div>

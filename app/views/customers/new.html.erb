@@ -1,41 +1,28 @@
 <div class="container col-12">
-  <div class="int1">
-    <h1>Book Customer for Flight <%= @flight.flight_number %></h1>
-  </div>
-  
-  <div class="row">
-    <div class="col-3 mt-5">
-      <%= simple_form_for(@customer, url: customers_path(flight_id: @flight.id)) do |f| %>
-        <div class="col-2.5">
-          <%= f.label :name, content_tag(:strong, 'Name passenger:') %>
-          <%= f.text_field :name, class: "rounded-box" %>
+      <div class="int1">
+        <h1>Book Customer for Flight <%= @flight.flight_number %></h1>
+      </div>
+      
+      <div class="row">
+        <div class="col-3 mt-5">
+          <%= simple_form_for(@customer, url: customers_path(flight_id: @flight.id)) do |f| %>
+            <div class="col-2.5">
+              <%= f.label :name, content_tag(:strong, 'Name passenger:') %>
+              <%= f.text_field :name, class: "rounded-box" %>
+            </div>
+            <br><br>
+            <div class="col-2.5">
+              <%= f.label :first_name, "<strong>Firstname passenger:</strong>".html_safe %>
+              <%= f.text_field :first_name, class: "rounded-box" %>
+            </div>
+            <br><br>
+            <div class="submit">
+              <%= f.submit "Valider", class: "btn btn-primary" %>
+            </div>
+            <br><br>
+            <span><%= link_to "AIR PLUS front page", pages_airplus_path, class: "btn btn-primary mx-2" %></span>
+          <% end %>
         </div>
-        <br><br>
-        <div class="col-2.5">
-          <%= f.label :first_name, "<strong>Firstname passenger:</strong>".html_safe %>
-          <%= f.text_field :first_name, class: "rounded-box" %>
-        </div>
-        <br><br>
-        <div class="submit">
-          <%= f.submit "Valider", class: "btn btn-primary" %>
-        </div>
-        <br><br>
-        <span><%= link_to "AIR PLUS front page", pages_airplus_path, class: "btn btn-primary mx-2" %></span>
-      <% end %>
+      </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
