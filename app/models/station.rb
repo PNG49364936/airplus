@@ -4,17 +4,18 @@ class Station < ApplicationRecord
     before_validation :upcase_place_name
     before_validation :upcase_country_name
     before_validation :upcase_country_name
-    before_validation :upcase_haul
+   # before_validation :upcase_haul
     validates :name, length: { within: 3..3 }
     validates :name,presence: true
     validates :place_name,presence: true
     validates :country_name,presence: true
-    validates :haul,presence: true
+    #validates :haul,presence: true
     validate :unique_name
  
     has_many :departure_flights, class_name: 'Flight', foreign_key: 'departure_station_id'
     has_many :arrival_flights, class_name: 'Flight', foreign_key: 'arrival_station_id'
     before_save :update_coordinates
+    #belongs_to :haul
 private
 
 def upcase_name
@@ -29,9 +30,7 @@ def upcase_country_name
   self.country_name = country_name.upcase if country_name.present?
 end
 
-def upcase_haul
-  self.haul = haul.upcase if name.present?
-end
+
 
 
 

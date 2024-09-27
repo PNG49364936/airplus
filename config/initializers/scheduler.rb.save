@@ -1,4 +1,4 @@
-require 'rufus-scheduler'
+rrrrequire 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.new
 scheduler.cron'1 00 * * 1-7' do
@@ -6,7 +6,7 @@ scheduler.cron'1 00 * * 1-7' do
   Flight.delete_past_flights
 end
 1.times do
-  puts "Salut, les jeunes."
+  puts "Hello world."
 end
 
 

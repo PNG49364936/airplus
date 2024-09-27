@@ -8,6 +8,7 @@ class Haul < ApplicationRecord
     has_many :flights
     has_many :aircrafts
     has_many :registrations
+    #has_many :stations
     
 
 private

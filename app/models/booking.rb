@@ -14,4 +14,15 @@ end
 class Booking < ApplicationRecord
   belongs_to :flight
   belongs_to :customer
+  def cancel
+    transaction do
+      update(status: 'cancelled')
+      # Ajoutez d'autres opérations si nécessaire
+    end
+  end
 end
+
+#class Booking < ApplicationRecord
+  #belongs_to :customer
+  #include Discard::Model
+#end

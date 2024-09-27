@@ -13,6 +13,7 @@ class StationsController < ApplicationController
     def new
         @station = Station.new
         @stations = Station.all
+        @hauls = Haul.all
     end
 
     def create 
@@ -50,7 +51,7 @@ class StationsController < ApplicationController
         end
 
         def params_station 
-            params.require(:station).permit(:name, :haul, :place_name, :country_name)
+            params.require(:station).permit(:name, :haul, :place_name, :country_name, :haul_id)
         end
 
 end

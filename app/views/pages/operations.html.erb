@@ -11,14 +11,19 @@
             </thead>
             <tbody id="test">
                 <tr>
-                    <td><strong>Aircrafts:</strong></td>
-                    <td><%= link_to "Créer type avion", new_aircraft_path, class: "btn btn-success" %></td>
-                    <td><%= link_to "Liste types avion", aircrafts_path, class: "btn btn-info" %></td>
+                    <td><strong>Airlines:</strong></td>
+                    <td><%= link_to "Créer Airline codes", new_airline_code_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste Airline codes", airline_codes_path, class: "btn btn-info" %></td>
                 </tr>
                 <tr>
                     <td><strong>Network:</strong></td>
                     <td><%= link_to "Créer Réseau", new_haul_path, class: "btn btn-success" %></td>
                     <td><%= link_to "Liste des réseaux", hauls_path, class: "btn btn-info" %></td>
+                </tr>
+                <tr>
+                    <td><strong>Aircrafts:</strong></td>
+                    <td><%= link_to "Créer type avion", new_aircraft_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste types avion", aircrafts_path, class: "btn btn-info" %></td>
                 </tr>
                 <tr>
                     <td><strong>Registrations:</strong></td>
@@ -35,6 +40,12 @@
                     <td><%= link_to "Créer Seats number", new_seat_path, class: "btn btn-success" %></td>
                     <td><%= link_to "Liste des Seats number", seats_path, class: "btn btn-info" %></td>
                 </tr>
+                <tr>
+                    <td><strong>Stations:</strong></td>
+                    <td><%= link_to "Créer Stations", new_station_path, class: "btn btn-success" %></td>
+                    <td><%= link_to "Liste stations", stations_path, class: "btn btn-info" %></td>
+                </tr>
+
             </tbody>
         </table>
         <h2 class="text-center my-4">Operating Flights</h2>
@@ -52,16 +63,8 @@
                     <td><%= link_to "Créer Flight ops", new_flight_path, class: "btn btn-success" %></td>
                     <td><%= link_to "Liste flights ops", flights_path, class: "btn btn-info" %></td>
                 </tr>
-                <tr>
-                    <td><strong>Stations:</strong></td>
-                    <td><%= link_to "Créer Stations", new_station_path, class: "btn btn-success" %></td>
-                    <td><%= link_to "Liste stations", stations_path, class: "btn btn-info" %></td>
-                </tr>
-                <tr>
-                    <td><strong>Airlines:</strong></td>
-                    <td><%= link_to "Créer Airline codes", new_airline_code_path, class: "btn btn-success" %></td>
-                    <td><%= link_to "Liste Airline codes", airline_codes_path, class: "btn btn-info" %></td>
-                </tr>
+                
+                
             </tbody>
         </table>
         <div class="text-center mt-5">

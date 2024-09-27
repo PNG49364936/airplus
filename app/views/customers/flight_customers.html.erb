@@ -11,6 +11,7 @@
             <tr>
             <th>Name</th>
             <th>First Name</th>
+            <th>Annuler</th>
             </tr>
         </thead>
         <tbody>
@@ -18,11 +19,16 @@
             <tr>
                 <td><%= customer.name %></td>
                 <td><%= customer.first_name %></td>
+                <td>
+                    <%=link_to"Annuler", customer_path(customer),method: :delete,class: "btn btn-danger btn-margin"%>
+                </td>
+             
             </tr>
+           
             <% end %>
         </tbody>
         </table>
 
-        <%= link_to 'Back to Flights', customers_list_path, class: 'btn btn-primary' %>
+        <%= link_to 'Back to Manage bookings', customers_list_path, class: 'btn btn-primary' %>
 
     </div>
